@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="测试测试$$ letex test $$$$ x^2+y^2=z^2 $$">
-<meta name="keywords" content="blog,technology">
+  <meta name="description" content="捣鼓了这么久，总算是实现在树莓派3b上开启支持ipv4和ipv6的热点，真是不容易,网上各种傻x桥接，根本跑不起来，看着都气人。">
+<meta name="keywords" content="raspberry,hotspot,technology">
 <meta property="og:type" content="article">
-<meta property="og:title" content="firstBlog">
-<meta property="og:url" content="https://ankikong.github.io/2019/08/16/firstBlog/index.html">
+<meta property="og:title" content="create hostapd with ipv4&amp;6 support">
+<meta property="og:url" content="https://ankikong.github.io/2019/09/06/create-hostapd-with-ipv4-6-support/index.html">
 <meta property="og:site_name" content="ankikong">
-<meta property="og:description" content="测试测试$$ letex test $$$$ x^2+y^2=z^2 $$">
+<meta property="og:description" content="捣鼓了这么久，总算是实现在树莓派3b上开启支持ipv4和ipv6的热点，真是不容易,网上各种傻x桥接，根本跑不起来，看着都气人。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-16T11:01:07.362Z">
+<meta property="og:updated_time" content="2019-09-06T14:33:19.399Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="firstBlog">
-<meta name="twitter:description" content="测试测试$$ letex test $$$$ x^2+y^2=z^2 $$">
-  <link rel="canonical" href="https://ankikong.github.io/2019/08/16/firstBlog/">
+<meta name="twitter:title" content="create hostapd with ipv4&amp;6 support">
+<meta name="twitter:description" content="捣鼓了这么久，总算是实现在树莓派3b上开启支持ipv4和ipv6的热点，真是不容易,网上各种傻x桥接，根本跑不起来，看着都气人。">
+  <link rel="canonical" href="https://ankikong.github.io/2019/09/06/create-hostapd-with-ipv4-6-support/">
 
 
 <script id="page.configurations">
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>firstBlog | ankikong</title>
+  <title>create hostapd with ipv4&6 support | ankikong</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129656297-1"></script>
   <script>
@@ -237,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/08/16/firstBlog/">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/09/06/create-hostapd-with-ipv4-6-support/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ankikong">
@@ -251,7 +251,7 @@
       <header class="post-header">
 
         
-          <h2 class="post-title" itemprop="name headline">firstBlog
+          <h2 class="post-title" itemprop="name headline">create hostapd with ipv4&6 support
 
               
             
@@ -271,7 +271,7 @@
                 
               
 
-              <time title="创建时间：2019-08-16 10:38:39 / 修改时间：19:01:07" itemprop="dateCreated datePublished" datetime="2019-08-16T10:38:39+08:00">2019-08-16</time>
+              <time title="创建时间：2019-09-06 21:53:11 / 修改时间：22:33:19" itemprop="dateCreated datePublished" datetime="2019-09-06T21:53:11+08:00">2019-09-06</time>
             </span>
           
             
@@ -290,7 +290,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>测试<br>$$ letex test $$<br>$$ x^2+y^2=z^2 $$</p>
+        <p>捣鼓了这么久，总算是实现在树莓派3b上开启支持ipv4和ipv6的热点，真是不容易,网上各种傻x桥接，根本跑不起来，看着都气人。</p>
+<a id="more"></a>
+
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>我用的是ubuntu官方的ubuntu18 server，但是能安装<code>dnsmasq</code>和<code>hostapd</code>的应该都通用</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ol>
+<li><p>安装<code>dnsmasq</code>，<code>hostapd</code></p>
+</li>
+<li><p>配置网卡</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">network:</span></span><br><span class="line"><span class="attr"> version:</span> <span class="number">2</span></span><br><span class="line"><span class="attr"> ethernets:</span></span><br><span class="line"><span class="attr">     eth0:</span></span><br><span class="line"><span class="attr">         dhcp4:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">         match:</span></span><br><span class="line"><span class="attr">             macaddress:</span> <span class="attr">b8:27:eb:a6:cc:93</span></span><br><span class="line"><span class="attr">         set-name:</span> <span class="string">eth0</span></span><br><span class="line"><span class="attr">     wlan0:</span></span><br><span class="line"><span class="attr">         dhcp4:</span> <span class="literal">no</span></span><br><span class="line"><span class="attr">         dhcp6:</span> <span class="literal">no</span></span><br><span class="line"><span class="attr">         optional:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">         addresses:</span> <span class="string">[192.168.0.1/24,</span> <span class="string">"fd00:fd:fd:fd::1/60"</span><span class="string">]</span></span><br><span class="line"><span class="attr">         nameservers:</span></span><br><span class="line"><span class="attr">                 addresses:</span> <span class="string">[1.0.0.1]</span></span><br></pre></td></tr></table></figure>
+
+<p>这里我是ubuntu18，所以用的是<code>netplan</code>。之前的版本，请自行百度设置静态地址。<strong>如果你知道上下的地址关系，你可以随便改，不然就别改。</strong></p>
+</li>
+<li><p>配置<code>hostapd</code><br>修改<code>/etc/hostapd/hostapd.conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">interface=wlan0</span><br><span class="line">channel=10</span><br><span class="line">wpa=2</span><br><span class="line">wpa_key_mgmt=WPA-PSK</span><br><span class="line">wpa_pairwise=CCMP</span><br><span class="line">rsn_pairwise=CCMP</span><br><span class="line">wpa_passphrase=12345678 #热点密码</span><br><span class="line">ssid=pi #热点名称</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>/etc/default/hostapd</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DAEMON_CONF=&quot;/etc/hostapd/hostapd.conf&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置<code>dnsmasq</code><br>修改<code>/etc/dnsmasq.conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface=wlan0</span><br><span class="line">enable-ra</span><br><span class="line">dhcp-range=192.168.0.2,192.168.0.255,255.255.255.0,24h</span><br><span class="line">dhcp-range=fd00:fd:fd:fd::2,fd00:fd:fd:fd::10,ra-names,24h</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置<code>/etc/sysctl.conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.ip_forward=1</span><br><span class="line">net.ipv6.conf.all.forwarding=1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service hostapd restart</span><br><span class="line">sudo service dnsmasq restart</span><br></pre></td></tr></table></figure>
+
+<p>这时应该可以连上wifi，并且获取ipv4和v6的地址了</p>
+</li>
+<li><p>配置v4防火墙</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -t nat -APOSTROUTING -o eth0 -j MASQUERADE</span><br><span class="line">sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>这时ipv4应该就可以上网了</p>
+</li>
+<li><p>配置v6防火墙</p>
+<p>增加文件<code>/etc/ip6tables-script</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># Generated by ip6tables-save v1.4.18 on Tue Jun 25 18:37:28 2013</span><br><span class="line">*filter</span><br><span class="line">:INPUT ACCEPT [698:82364]</span><br><span class="line">:FORWARD ACCEPT [2559:2158868]</span><br><span class="line">:OUTPUT ACCEPT [766:86950]</span><br><span class="line">COMMIT</span><br><span class="line"># Completed on Tue Jun 25 18:37:28 2013</span><br><span class="line"># Generated by ip6tables-save v1.4.18 on Tue Jun 25 18:37:28 2013</span><br><span class="line">*nat</span><br><span class="line">:PREROUTING ACCEPT [122:11801]</span><br><span class="line">:INPUT ACCEPT [13:1643]</span><br><span class="line">:OUTPUT ACCEPT [43:3820]</span><br><span class="line">:POSTROUTING ACCEPT [44:3924]</span><br><span class="line">-A POSTROUTING -s fd00:fd:fd:fd::/64 -o eth0 -j MASQUERADE</span><br><span class="line">COMMIT</span><br><span class="line"># Completed on Tue Jun 25 18:37:28 2013</span><br><span class="line">ubuntu@ubuntu:~$ cd /etc/sysconfig</span><br><span class="line">-bash: cd: /etc/sysconfig: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ip6tables-restore /etc/ip6tables-script</span><br></pre></td></tr></table></figure>
+
+<p>这时，ipv6也可以上网了</p>
+</li>
+</ol>
+<h2 id="开机自启"><a href="#开机自启" class="headerlink" title="开机自启"></a>开机自启</h2><p>按照上面的方法，你已经可以上ipv4和ipv6了，但是每次重启都要执行命令。<br>修改<code>/etc/rc.local</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -APOSTROUTING -o eth0 -j MASQUERADE</span><br><span class="line">iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT</span><br><span class="line">ip6tables-restore /etc/ip6tables-script</span><br></pre></td></tr></table></figure>
+
+<p>完事，有问题请<a href="mailto:ankikong@qq.com" target="_blank" rel="noopener">Email</a>，或是来<a href="https://github.com/AnkiKong/ankikong.github.io" target="_blank" rel="noopener">这里</a>发issue</p>
 
     </div>
 
@@ -299,10 +346,20 @@
     
 
     <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/raspberry/" rel="tag"># raspberry</a>
+          
+            <a href="/tags/hotspot/" rel="tag"># hotspot</a>
+          
+            <a href="/tags/technology/" rel="tag"># technology</a>
+          
+        </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/2019/08/16/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/08/16/banzi/" rel="next" title="banzi">
+                <i class="fa fa-chevron-left"></i> banzi
               </a>
             
           </div>
@@ -310,10 +367,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2019/08/16/banzi/" rel="prev" title="banzi">
-                banzi <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
@@ -435,7 +488,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">1.</span> <span class="nav-text">测试</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开机自启"><span class="nav-number">3.</span> <span class="nav-text">开机自启</span></a></li></ol></div>
             
 
           </div>
