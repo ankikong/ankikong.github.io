@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="测试测试$$ letex test $$$$ x^2+y^2=z^2 $$">
-<meta name="keywords" content="blog,technology">
+  <meta name="description" content="网上好像用软链的方法挺多的，今天不是用软链方式(主要是我失败了)">
+<meta name="keywords" content="technology,wsl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="firstBlog">
-<meta property="og:url" content="https://ankikong.github.io/2019/08/16/firstBlog/index.html">
+<meta property="og:title" content="install wsl on a non-system drive">
+<meta property="og:url" content="https://ankikong.github.io/2019/11/23/install-wsl-on-a-non-system-drive/index.html">
 <meta property="og:site_name" content="ankikong">
-<meta property="og:description" content="测试测试$$ letex test $$$$ x^2+y^2=z^2 $$">
+<meta property="og:description" content="网上好像用软链的方法挺多的，今天不是用软链方式(主要是我失败了)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-16T11:01:07.362Z">
+<meta property="og:updated_time" content="2019-11-23T04:07:20.599Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="firstBlog">
-<meta name="twitter:description" content="测试测试$$ letex test $$$$ x^2+y^2=z^2 $$">
-  <link rel="canonical" href="https://ankikong.github.io/2019/08/16/firstBlog/">
+<meta name="twitter:title" content="install wsl on a non-system drive">
+<meta name="twitter:description" content="网上好像用软链的方法挺多的，今天不是用软链方式(主要是我失败了)">
+  <link rel="canonical" href="https://ankikong.github.io/2019/11/23/install-wsl-on-a-non-system-drive/">
 
 
 <script id="page.configurations">
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>firstBlog | ankikong</title>
+  <title>install wsl on a non-system drive | ankikong</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129656297-1"></script>
   <script>
@@ -237,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/08/16/firstBlog/">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/11/23/install-wsl-on-a-non-system-drive/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ankikong">
@@ -251,7 +251,7 @@
       <header class="post-header">
 
         
-          <h2 class="post-title" itemprop="name headline">firstBlog
+          <h2 class="post-title" itemprop="name headline">install wsl on a non-system drive
 
               
             
@@ -271,7 +271,7 @@
                 
               
 
-              <time title="创建时间：2019-08-16 10:38:39 / 修改时间：19:01:07" itemprop="dateCreated datePublished" datetime="2019-08-16T10:38:39+08:00">2019-08-16</time>
+              <time title="创建时间：2019-11-23 11:50:08 / 修改时间：12:07:20" itemprop="dateCreated datePublished" datetime="2019-11-23T11:50:08+08:00">2019-11-23</time>
             </span>
           
             
@@ -290,7 +290,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>测试<br>$$ letex test $$<br>$$ x^2+y^2=z^2 $$</p>
+        <p>网上好像用软链的方法挺多的，今天不是用软链方式(主要是我失败了)</p>
+<a id="more"></a>
+
+<h2 id="新建文件夹"><a href="#新建文件夹" class="headerlink" title="新建文件夹"></a>新建文件夹</h2><p>新建的文件夹就是等等wsl的安装目录</p>
+<h2 id="开启wsl"><a href="#开启wsl" class="headerlink" title="开启wsl"></a>开启wsl</h2><p>进入上面新建的文件夹，然后右上点击<code>文件 - 以管理员身份打开power shell</code><br>输入<code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</code><br>应该会输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Path          :</span><br><span class="line">Online        : True</span><br><span class="line">RestartNeeded : False</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载wsl安装文件"><a href="#下载wsl安装文件" class="headerlink" title="下载wsl安装文件"></a>下载wsl安装文件</h2><p>输入<code>Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1604 -OutFile Ubuntu.appx -UseBasicParsing</code><br>关于<code>wsl-ubuntu-1604</code>,可以去微软应用商店看看有什么版本，我试了<code>wsl-ubuntu-1604</code>和<code>wsl-ubuntu-1804</code>都可以<br>国内下载可能很慢，有梯子的话，可以加<code>-Proxy http://xxxxxx</code></p>
+<h2 id="解压-amp-安装"><a href="#解压-amp-安装" class="headerlink" title="解压&amp;安装"></a>解压&amp;安装</h2><p>把下载下来的文件后缀名改为<code>zip</code>，然后解压到当前目录。解压完毕有一个exe文件，在power shell里面输入<code>./xxxx.exe</code>，xxxx就是exe的文件名，然后回车，等待就行了。接下来会要求你输入wsl的用户名的密码，输入完毕，wsl就装好了</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="https://damsteen.nl/blog/2018/08/29/installing-wsl-manually-on-non-system-drive" target="_blank" rel="noopener">installing-wsl-manually-on-non-system-drive</a></li>
+</ul>
 
     </div>
 
@@ -299,10 +310,18 @@
     
 
     <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/technology/" rel="tag"># technology</a>
+          
+            <a href="/tags/wsl/" rel="tag"># wsl</a>
+          
+        </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/2019/08/16/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/10/24/MySql-Password/" rel="next" title="MySql-Password">
+                <i class="fa fa-chevron-left"></i> MySql-Password
               </a>
             
           </div>
@@ -310,10 +329,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2019/08/16/banzi/" rel="prev" title="banzi">
-                banzi <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
@@ -439,7 +454,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">1.</span> <span class="nav-text">测试</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#新建文件夹"><span class="nav-number">1.</span> <span class="nav-text">新建文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启wsl"><span class="nav-number">2.</span> <span class="nav-text">开启wsl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载wsl安装文件"><span class="nav-number">3.</span> <span class="nav-text">下载wsl安装文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解压-amp-安装"><span class="nav-number">4.</span> <span class="nav-text">解压&amp;安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">5.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
             
 
           </div>
