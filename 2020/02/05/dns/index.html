@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="回家后发现家里的新拉的光纤是移动的，但是移动居然对53端口的udp实行完全拦截，也就是dns拦截。想起之前在宿舍使用的cloudflare的json格式的DoH还有DoT，所以决定搞一搞。">
+<meta name="keywords" content="programming,network">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dns">
+<meta property="og:url" content="https://ankikong.github.io/2020/02/05/dns/index.html">
+<meta property="og:site_name" content="ankikong">
+<meta property="og:description" content="回家后发现家里的新拉的光纤是移动的，但是移动居然对53端口的udp实行完全拦截，也就是dns拦截。想起之前在宿舍使用的cloudflare的json格式的DoH还有DoT，所以决定搞一搞。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-12T15:07:55.486Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="dns">
+<meta name="twitter:description" content="回家后发现家里的新拉的光纤是移动的，但是移动居然对53端口的udp实行完全拦截，也就是dns拦截。想起之前在宿舍使用的cloudflare的json格式的DoH还有DoT，所以决定搞一搞。">
+  <link rel="canonical" href="https://ankikong.github.io/2020/02/05/dns/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>dns | ankikong</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129656297-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-129656297-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ankikong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+    </ul>
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    <div class="reading-progress-bar"></div>
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/05/dns/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">dns
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-05 12:21:52" itemprop="dateCreated datePublished" datetime="2020-02-05T12:21:52+08:00">2020-02-05</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-12 23:07:55" itemprop="dateModified" datetime="2020-02-12T23:07:55+08:00">2020-02-12</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>回家后发现家里的新拉的光纤是移动的，但是移动居然对53端口的udp实行完全拦截，也就是dns拦截。想起之前在宿舍使用的cloudflare的json格式的DoH还有DoT，所以决定搞一搞。</p>
+<a id="more"></a>
+
+<h2 id="DoH"><a href="#DoH" class="headerlink" title="DoH"></a>DoH</h2><p>把RFC8484关于实现的那部分看了,并没有JSON API格式的,一查,原来还只是草案.<br>DoH(Dns over HTTPS),cloudflare(1.1.1.1)和Google(8.8.8.8)的dns都支持JSON格式的,虽说还是草案,但是国内好几个私人的DoH供应商都有提供,所以讲一下</p>
+<h3 id="JSON-API"><a href="#JSON-API" class="headerlink" title="JSON API"></a>JSON API</h3><p>JSON格式的请求,草案里写了必须要有Qname(请求的查询的域名),Qtype(请求查询的类型,A,AAAA,CNAME等),Qclass(这个不知道是啥,CF和Google的实现都没有这个字段,所以无视就行了)</p>
+<p>请求:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://1.0.0.1/dns-query?ct=application/dns-json&amp;name=baidu.com&amp;type=A</span><br></pre></td></tr></table></figure>
+
+<p>响应:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"Status"</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">"TC"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"RD"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"RA"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"AD"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"CD"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"Question"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"baidu.com"</span>,</span><br><span class="line">            <span class="attr">"type"</span>: <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"Answer"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"baidu.com"</span>,</span><br><span class="line">            <span class="attr">"type"</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="attr">"TTL"</span>: <span class="number">389</span>,</span><br><span class="line">            <span class="attr">"data"</span>: <span class="string">"39.156.69.79"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"baidu.com"</span>,</span><br><span class="line">            <span class="attr">"type"</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="attr">"TTL"</span>: <span class="number">389</span>,</span><br><span class="line">            <span class="attr">"data"</span>: <span class="string">"220.181.38.148"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>好像很简单</p>
+<h3 id="Wireformat"><a href="#Wireformat" class="headerlink" title="Wireformat"></a>Wireformat</h3><p>格式按照<code>RFC1035</code>,刚开始不知道,然后就开始按着文档手撸实现,越撸越不对劲,发现这就是一个普通的DNS的UDP包格式……</p>
+<p>按照RFC8484,DoH需要支持GET和POST两种格式</p>
+<p>GET请求,需要把DNS包进行base64转一下,去除结尾的<code>=</code>后发送,如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://1.0.0.1/dns-query?dns=AAMBAAABAAAAAAAABWJhaWR1A2NvbQAAAQAB</span><br></pre></td></tr></table></figure>
+
+<p>POST请求,DNS包不需要任何操作,当成body直接POST就可以了</p>
+<p>返回数据也是一个标准的UDP的DNS报文,直接返回就可以了</p>
+<p>所以按照RFC8484,用python的话,一个简单的本地DoH转UDP格式的本地服务器就可以搭建起来了:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- encoding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> socketserver <span class="keyword">import</span> DatagramRequestHandler, ThreadingUDPServer</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">server_ip = <span class="string">"127.0.0.1"</span></span><br><span class="line">server_port = <span class="number">53</span></span><br><span class="line">server_name = <span class="string">"github.com/SodiumAzide"</span></span><br><span class="line">s = requests.session()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span><span class="params">(DatagramRequestHandler)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handle</span><span class="params">(self)</span>:</span></span><br><span class="line">        data = self.rfile.read()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># GET 请求</span></span><br><span class="line">        <span class="comment"># txt = base64.b64encode(data).decode().strip("=")</span></span><br><span class="line">        <span class="comment"># rs = s.get("https://223.5.5.5/dns-query?dns=" + txt).content</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># POST请求</span></span><br><span class="line">        rs = s.post(<span class="string">"https://223.5.5.5/dns-query"</span>, data=data).content</span><br><span class="line">        self.wfile.write(rs)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    server = ThreadingUDPServer((server_ip, server_port), Server)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        server.serve_forever()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        server.shutdown()</span><br></pre></td></tr></table></figure>
+
+<h2 id="DoT"><a href="#DoT" class="headerlink" title="DoT"></a>DoT</h2><p>最近把之前缺的DoT的RFC也看了.根据RFC7858关于数据的部分,也是按照RFC1035的数据包.看来真的是dns over xxxx了,就是将之前UDP的dns通过https或tls进行传输.那就没啥好说了.<br>发送数据前,需要发送udp数据包的长度,编码为两字节大端格式</p>
+<blockquote>
+<p>(All messages (requests and responses) in the established TLS session<br>   MUST use the <strong>two-octet length</strong> field described in Section 4.2.2 of<br>   [RFC1035]).</p>
+</blockquote>
+<p>刚开始看漏了这几句,卡了好久.具体看代码吧.<br><strong>PS</strong>:cloudflare的dns,是把长度+响应数据一起发送,阿里的dns是先发长度,然后再发相应包.RFC里面也没说是那种,所以发现只收到两个字节的,记得把后面那段也收了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- encoding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> socketserver <span class="keyword">import</span> DatagramRequestHandler, ThreadingUDPServer</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> ssl</span><br><span class="line"></span><br><span class="line">server_ip = <span class="string">"127.0.0.1"</span></span><br><span class="line">server_port = <span class="number">53</span></span><br><span class="line">server_name = <span class="string">"github.com/SodiumAzide"</span></span><br><span class="line">s = requests.session()</span><br><span class="line">ss = <span class="string">"one.one.one.one"</span></span><br><span class="line">port = <span class="number">853</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span><span class="params">(DatagramRequestHandler)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handle</span><span class="params">(self)</span>:</span></span><br><span class="line">        data = self.rfile.read()</span><br><span class="line">        context = ssl.create_default_context()</span><br><span class="line">        <span class="keyword">with</span> socket.create_connection((ss, <span class="number">853</span>)) <span class="keyword">as</span> sock:</span><br><span class="line">            <span class="keyword">with</span> context.wrap_socket(sock, server_hostname=ss) <span class="keyword">as</span> ssock:</span><br><span class="line">                dataLen = len(data)</span><br><span class="line">                data = dataLen.to_bytes(<span class="number">2</span>, <span class="string">"big"</span>) + data</span><br><span class="line">                ssock.send(data)</span><br><span class="line">                rs = ssock.recv(<span class="number">1024</span>)</span><br><span class="line">                self.wfile.write(rs[<span class="number">2</span>:])</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    server = ThreadingUDPServer((server_ip, server_port), Server)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        server.serve_forever()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        server.shutdown()</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li><a href="https://tools.ietf.org/html/draft-bortzmeyer-dns-json-01" target="_blank" rel="noopener">JSON format to represent DNS data</a></li>
+<li><a href="https://tools.ietf.org/html/rfc1035" target="_blank" rel="noopener">(RFC1035)DOMAIN NAMES - IMPLEMENTATION AND SPECIFICATION</a></li>
+<li><a href="https://tools.ietf.org/html/rfc7858" target="_blank" rel="noopener">(RFC7858)Specification for DNS over Transport Layer Security (TLS)</a></li>
+<li><a href="https://tools.ietf.org/html/rfc8484" target="_blank" rel="noopener">(RFC8484)DNS Queries over HTTPS (DoH)</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/programming/" rel="tag"># programming</a>
+          
+            <a href="/tags/network/" rel="tag"># network</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2020/02/03/programming-lock/" rel="next" title="几种锁">
+                <i class="fa fa-chevron-left"></i> 几种锁
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2020/02/06/cloudflare/" rel="prev" title="cloudflare">
+                cloudflare <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ankikong</p>
+  <div class="site-description motion-element" itemprop="description">ankikong's blog</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/ankikong" title="GitHub &rarr; https://github.com/ankikong" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:ankikong@qq.com" title="E-Mail &rarr; mailto:ankikong@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DoH"><span class="nav-number">1.</span> <span class="nav-text">DoH</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON-API"><span class="nav-number">1.1.</span> <span class="nav-text">JSON API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wireformat"><span class="nav-number">1.2.</span> <span class="nav-text">Wireformat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DoT"><span class="nav-number">2.</span> <span class="nav-text">DoT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ankikong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1/reading_progress.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

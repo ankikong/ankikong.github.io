@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="ankikong&apos;s blog">
+<meta name="keywords" content="blog,technology">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ankikong">
+<meta property="og:url" content="https://ankikong.github.io/page/2/index.html">
+<meta property="og:site_name" content="ankikong">
+<meta property="og:description" content="ankikong&apos;s blog">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ankikong">
+<meta name="twitter:description" content="ankikong&apos;s blog">
+  <link rel="canonical" href="https://ankikong.github.io/page/2/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ankikong</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129656297-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-129656297-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ankikong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+    </ul>
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/03/programming-lock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/03/programming-lock/" class="post-title-link" itemprop="url">几种锁</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-03 19:48:12" itemprop="dateCreated datePublished" datetime="2020-02-03T19:48:12+08:00">2020-02-03</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-06 19:11:48" itemprop="dateModified" datetime="2020-02-06T19:11:48+08:00">2020-02-06</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h2><p>某一时刻最多只有一个线程能获得互斥锁</p>
+<h2 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h2><p>一种特殊的互斥锁,获取不到锁时,不是直接进入阻塞队列等待唤醒,而是进入循环等待状态(占用CPU),循环询问能否获得锁,具有高响应,但是占用大量CPU资源</p>
+<h2 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h2><p>读写锁某一时刻只能被一条线程获得写锁或者同时被多条线程获得读锁.<br>读写,写写互斥.读读可同时进行</p>
+<h2 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h2><p>在每次读取数据时都认为会有人更改数据,所以每次读取数据时都会加锁.<br>很多传统关系型数据库就使用了这个锁,</p>
+<h2 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h2><p>在每次读取数据时都认为不会有人更改数据,所以每次读取数据时都不会加锁.在更新时会判断一下是否有其他线程更改了数据,是的话返回错误,具体操作有开发人员决定</p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/03/learning-bash/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/03/learning-bash/" class="post-title-link" itemprop="url">learning bash</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-03 14:34:38" itemprop="dateCreated datePublished" datetime="2020-02-03T14:34:38+08:00">2020-02-03</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-06 19:23:43" itemprop="dateModified" datetime="2020-02-06T19:23:43+08:00">2020-02-06</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ul>
+<li>变量定义和赋值，变量名和赋值符号和值之间不能有空格</li>
+<li>变量名规则和c语言要求一致</li>
+<li>使用已定义的变量用<code>$</code>引用，如<code>$FUCK</code>或<code>${FUCK}</code>，花括号只起边界作用</li>
+<li>可以使用<code>readonly xxxx</code>,将<code>xxxx</code>设置为只读变量,只读变量不允许修改和删除</li>
+<li><code>unset</code>可以删除变量</li>
+<li>字符串<ul>
+<li>单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的；</li>
+<li>单引号字串中不能出现单独一个的单引号（对单引号使用转义符后也不行），但可成对出现，作为字符串拼接使用。</li>
+<li>双引号里可以有变量</li>
+<li>双引号里可以出现转义字符</li>
+<li>字符串可以直接拼接<code>&quot;ahh&quot;${agg}&quot;ahhhh&quot;</code></li>
+<li>子串<code>${string:1:2}</code></li>
+<li>串长<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- 数组</span><br><span class="line">  - 只支持一维数组</span><br><span class="line">  - 定义`a=(var1 var2 var3)`</span><br><span class="line">  - `a[n]=111`</span><br><span class="line">  - 读取数组`$(a[n])`,使用`@`可以获取数组全部元素</span><br><span class="line">  - 数组长度```$&#123;#a[*]&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h2><p><code>$0</code>: 可执行文件文件名<br><code>$#</code>: 传递参数数量<br><code>$*</code>: 传递的所有参数<br><code>$$</code>: 当前运行脚本的PID<br><code>$@</code>: 和<code>$*</code>一样<br><code>$-</code>: 显示Shell使用的当前选项<br><code>$?</code>: 最后命令的退出状态。0表示没有错误，其他任何值表明有错误</p>
+<h2 id="中括号"><a href="#中括号" class="headerlink" title="中括号"></a>中括号</h2><ul>
+<li>算术比较, 比如一个变量是否为0, <code>[ $var -eq 0 ]</code><ul>
+<li><code>-eq</code> 相等</li>
+<li><code>-ne</code> 不等</li>
+<li><code>-gt</code> 大于</li>
+<li><code>-lt</code> 小于</li>
+<li><code>-ge</code> 大于或等于</li>
+<li><code>-le</code> 小于或等于</li>
+</ul>
+</li>
+<li>文件属性测试，比如一个文件是否存在，<code>[ -e $var ]</code><ul>
+<li><code>-b</code> 是否块设备文件</li>
+<li><code>-c</code> 是否字符设备文件</li>
+<li><code>-d</code> 是否目录</li>
+<li><code>-e</code> 文件是否存在</li>
+<li><code>-f</code> 正常文件路径或文件名</li>
+<li><code>-x</code> 可执行文件</li>
+<li><code>-L</code> 是否符号连接</li>
+<li><code>-r</code> 是否可读</li>
+<li><code>-w</code> 是否可写</li>
+</ul>
+</li>
+<li>字符串比较<ul>
+<li>两个字符串是否相同 <code>[[ $var1 = $var2 ]]</code>,<code>test $var1 = $var2</code></li>
+<li>两个字符串是否不同 <code>[[ $var1 != $var2 ]]</code></li>
+<li>是否空串          <code>[[ -z $str1 ]]</code></li>
+<li>是否非空串        <code>[[ -n $str1 ]]</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
+<li>布尔运算<ul>
+<li><code>!</code>  非</li>
+<li><code>-o</code>,<code>||</code> 或</li>
+<li><code>-a</code>,<code>&amp;&amp;</code> 与</li>
+</ul>
+</li>
+</ul>
+<h2 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h2><p><code>printf  format-string  [arguments...]</code></p>
+<ul>
+<li>格式化方式和c语言的printf一致</li>
+</ul>
+<h2 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h2><h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a=10</span><br><span class="line">b=20</span><br><span class="line">if [ $a == $b ]</span><br><span class="line">then</span><br><span class="line">   echo "a 等于 b"</span><br><span class="line">elif [ $a -gt $b ]</span><br><span class="line">then</span><br><span class="line">   echo "a 大于 b"</span><br><span class="line">elif [ $a -lt $b ]</span><br><span class="line">then</span><br><span class="line">   echo "a 小于 b"</span><br><span class="line">else</span><br><span class="line">   echo "没有符合的条件"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">for var in item1 item2 ... itemN</span><br><span class="line">do</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    ...</span><br><span class="line">    commandN</span><br><span class="line">done</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">###################################</span></span></span><br><span class="line">for((assignment;condition:next));do</span><br><span class="line">    command_1;</span><br><span class="line">    command_2;</span><br><span class="line">    commond_..;</span><br><span class="line">done;</span><br></pre></td></tr></table></figure>
+
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while condition</span><br><span class="line">do</span><br><span class="line">    command</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="case"><a href="#case" class="headerlink" title="case"></a>case</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">case 值 in</span><br><span class="line">模式1)</span><br><span class="line">    ...</span><br><span class="line">    commandN</span><br><span class="line">    ;;</span><br><span class="line">模式2）</span><br><span class="line">    ...</span><br><span class="line">    commandN</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>参数获取方式和cmd的参数获取一致</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[ function ] funname [()]</span><br><span class="line">&#123;</span><br><span class="line">    action;</span><br><span class="line">    [return int;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h2><ul>
+<li>command &gt; file  将输出重定向到 file</li>
+<li>command &lt; file  将输入重定向到 file</li>
+<li>文件描述符 0 通常是标准输入（STDIN），1 是标准输出（STDOUT），2 是标准错误输出（STDERR）</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/02/docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/02/docker/" class="post-title-link" itemprop="url">docker学习笔记</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-02 22:07:33" itemprop="dateCreated datePublished" datetime="2020-02-02T22:07:33+08:00">2020-02-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-06 19:02:49" itemprop="dateModified" datetime="2020-02-06T19:02:49+08:00">2020-02-06</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="构建时的相对路径"><a href="#构建时的相对路径" class="headerlink" title="构建时的相对路径"></a>构建时的相对路径</h2><p><code>docker build .</code> 并不是指定d<code>ockerfile</code>的路径，而是指定了构建时ADD和COPY的上下文路径，然后根据这个路径将文件加入&amp;复制到镜像中</p>
+<h2 id="DOCKERFILE"><a href="#DOCKERFILE" class="headerlink" title="DOCKERFILE"></a>DOCKERFILE</h2><h3 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h3><ul>
+<li>FROM是指定的基础镜像，构建时在基础镜像之上操作</li>
+<li>必须是第一条指令</li>
+</ul>
+<h3 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h3><p>RUN是在构建镜时执行一次的shell脚本</p>
+<ul>
+<li>一个RUN对应一个UNION FS层，因此，一般RUN多条指令用 &amp;&amp; 连接，而不是多个RUN</li>
+</ul>
+<h3 id="COPY"><a href="#COPY" class="headerlink" title="COPY"></a>COPY</h3><ul>
+<li>COPY的目的路径既可以是镜像的绝对路径，也可以是相对路径（相对于<code>WORKDIR</code>）</li>
+<li>COPY会保留文件的各种元数据，包括权限，时间戳等</li>
+<li>可以加上<code>--chown=&lt;user&gt;:&lt;group&gt;</code>修改目标权限 <code>COPY --chown=55:mygroup files* /mydir/</code></li>
+</ul>
+<h3 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h3><ul>
+<li>可以<code>ADD URL</code>，将链接文件下载到指定位置，然后设置权限600</li>
+<li>ADD一个压缩文件，则会自动解压到指定目录</li>
+</ul>
+<h3 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h3><ul>
+<li>容器开启时使用的命令</li>
+<li>由于CMD一结束，docker容器也会一起停止运行，所以CMD执行服务的话，要让任务在前台运行</li>
+</ul>
+<h3 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h3><ul>
+<li>docker run xxx 时，会把后面的参数传递给ENTRYPOINT</li>
+</ul>
+<h3 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a>ENV</h3><ul>
+<li>设置容器运行时环境变量，有两种格式</li>
+<li><code>ENV &lt;key&gt; &lt;value&gt;</code></li>
+<li><code>ENV &lt;key1&gt;=&lt;value1&gt; &lt;key2&gt;=&lt;value2&gt;...</code></li>
+</ul>
+<h3 id="ARG"><a href="#ARG" class="headerlink" title="ARG"></a>ARG</h3><ul>
+<li>设置构建容器时的环境变量</li>
+<li>可以使用<code>--build-arg &lt;参数名&gt;=&lt;值&gt;</code>在执行时加入</li>
+</ul>
+<h3 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a>VOLUME</h3><ul>
+<li>容器写操作执行位置，应避免在容器的存储层写数据</li>
+</ul>
+<h3 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h3><ul>
+<li>声明端口，但运行时不会在宿主进行端口映射</li>
+</ul>
+<h3 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h3><ul>
+<li>指定工作目录</li>
+</ul>
+<h3 id="USER"><a href="#USER" class="headerlink" title="USER"></a>USER</h3><ul>
+<li>指定当前用户，用户必须提前创建</li>
+</ul>
+<h3 id="HEALTHCHECK"><a href="#HEALTHCHECK" class="headerlink" title="HEALTHCHECK"></a>HEALTHCHECK</h3><ul>
+<li>健康检查，告诉docker应该如何判断容器是否正常</li>
+<li><code>HEALTHCHECK</code> 支持下列选项：<ul>
+<li><code>--interval=&lt;间隔&gt;</code>：两次健康检查的间隔，默认为 30 秒；</li>
+<li><code>--timeout=&lt;时长&gt;</code>：健康检查命令运行超时时间，如果超过这个时间，本次健康检查就被视为失败，默认 30 秒；</li>
+<li><code>--retries=&lt;次数&gt;</code>：当连续失败指定次数后，则将容器状态视为 unhealthy，默认 3 次。</li>
+</ul>
+</li>
+</ul>
+<h3 id="ONBUILD"><a href="#ONBUILD" class="headerlink" title="ONBUILD"></a>ONBUILD</h3><ul>
+<li><code>ONBUILD</code> 是一个特殊的指令，它后面跟的是其它指令，比如 <code>RUN</code>, <code>COPY</code> 等，而这些指令，在当前镜像构建时并不会被执行。只有当以当前镜像为基础镜像，去构建下一级镜像的时候才会被执行</li>
+</ul>
+<h2 id="操作容器"><a href="#操作容器" class="headerlink" title="操作容器"></a>操作容器</h2><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><h4 id="新建并启动"><a href="#新建并启动" class="headerlink" title="新建并启动"></a>新建并启动</h4><ul>
+<li>所需要的命令主要为 docker run</li>
+</ul>
+<h4 id="启动已终止容器"><a href="#启动已终止容器" class="headerlink" title="启动已终止容器"></a>启动已终止容器</h4><ul>
+<li><code>docker container start</code></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/02/POSIX-semaphore/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/02/POSIX-semaphore/" class="post-title-link" itemprop="url">POSIX semaphore</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-02 16:03:15" itemprop="dateCreated datePublished" datetime="2020-02-02T16:03:15+08:00">2020-02-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-06 19:11:09" itemprop="dateModified" datetime="2020-02-06T19:11:09+08:00">2020-02-06</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <a id="more"></a>
+
+<h2 id="无名信号量"><a href="#无名信号量" class="headerlink" title="无名信号量"></a>无名信号量</h2><ul>
+<li>除非使用共享内存，否则只能控制通同一进程的线程</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化信号量sem的初始值为value</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_init</span> <span class="params">(<span class="keyword">sem_t</span> *__sem, <span class="keyword">int</span> __pshared, <span class="keyword">unsigned</span> <span class="keyword">int</span> __value)</span></span></span><br><span class="line"><span class="function"><span class="comment">// 删除信号量</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_destroy</span> <span class="params">(<span class="keyword">sem_t</span> *__sem)</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="有名信号量"><a href="#有名信号量" class="headerlink" title="有名信号量"></a>有名信号量</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// name是名称</span></span><br><span class="line"><span class="comment">// oflag：O_CREAT：如果信号量不存在则新建，存在直接返回</span></span><br><span class="line"><span class="comment">//        如果为O_CREAT|O_EXCL，则已存在的话会返回错误</span></span><br><span class="line"><span class="comment">// mode:</span></span><br><span class="line"><span class="comment">// value：初始值</span></span><br><span class="line"><span class="keyword">sem_t</span> *sem_open(<span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">int</span> oflag);</span><br><span class="line"><span class="keyword">sem_t</span> *sem_open(<span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">int</span> oflag, <span class="keyword">mode_t</span> mode, <span class="keyword">unsigned</span> <span class="keyword">int</span> value);</span><br><span class="line"><span class="comment">// 关闭进程内信号量</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_close</span> <span class="params">(<span class="keyword">sem_t</span> *__sem)</span></span></span><br><span class="line"><span class="function"><span class="comment">// 从内核中删除有名信号量</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_unlink</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *__name)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>示例</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> pid = fork();</span><br><span class="line"><span class="keyword">if</span> (pid&lt;<span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"fork failed"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (pid==<span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">sem_t</span>* sem=sem_open(<span class="string">"test"</span>, O_CREAT, <span class="number">0666</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> rs = sem_wait(sem);</span><br><span class="line">    <span class="keyword">if</span> (rs&lt;<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"wait failed"</span>;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"success 1"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        sleep(<span class="number">3</span>);</span><br><span class="line">        sem_post(sem);</span><br><span class="line">        sem_close(sem);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">sem_t</span>* sem=sem_open(<span class="string">"test"</span>, O_CREAT, <span class="number">0666</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> rs=sem_wait(sem);</span><br><span class="line">    <span class="keyword">if</span> (rs&lt;<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"wait failed"</span>;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"success 2"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        sleep(<span class="number">3</span>);</span><br><span class="line">        sem_post(sem);</span><br><span class="line">        sem_close(sem);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> tmp;</span><br><span class="line">    wait(&amp;tmp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="共用操作"><a href="#共用操作" class="headerlink" title="共用操作"></a>共用操作</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 阻塞获取，值-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_wait</span> <span class="params">(<span class="keyword">sem_t</span> *__sem)</span></span></span><br><span class="line"><span class="function"><span class="comment">// 阻塞超时获取</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_timedwait</span> <span class="params">(<span class="keyword">sem_t</span> *__restrict __sem, <span class="keyword">const</span> struct timespec *__restrict __abstime)</span></span></span><br><span class="line"><span class="function">struct timespec </span>&#123;</span><br><span class="line">  <span class="keyword">__time_t</span> tv_sec;            <span class="comment">// Seconds</span></span><br><span class="line">  <span class="keyword">__syscall_slong_t</span> tv_nsec;  <span class="comment">// Nanoseconds</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 非阻塞获取信号量，成功放回0，值-1；失败返回-1</span></span><br><span class="line"><span class="comment">// EINTR：信号处理函数中断调用</span></span><br><span class="line"><span class="comment">// EINVAL：信号量sem值无效</span></span><br><span class="line"><span class="comment">// EAGAIN：信号量不足</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_trywait</span> <span class="params">(<span class="keyword">sem_t</span> *__sem)</span></span></span><br><span class="line"><span class="function"><span class="comment">// 释放信号量，值+1</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_post</span> <span class="params">(<span class="keyword">sem_t</span> *__sem)</span></span></span><br><span class="line"><span class="function"><span class="comment">// 获取当前信号量的值，存在sval</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_getvalue</span> <span class="params">(<span class="keyword">sem_t</span> *__restrict __sem, <span class="keyword">int</span> *__restrict __sval)</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="http://man7.org/linux/man-pages/man3/sem_open.3.html" target="_blank" rel="noopener">Linux Programmer’s Manual</a></li>
+<li><a href="https://www.jianshu.com/p/6e72ff770244" target="_blank" rel="noopener">Linux信号量</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/01/29/Linux-IPC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/29/Linux-IPC/" class="post-title-link" itemprop="url">Linux-IPC</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-29 20:37:48" itemprop="dateCreated datePublished" datetime="2020-01-29T20:37:48+08:00">2020-01-29</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-06 19:12:04" itemprop="dateModified" datetime="2020-02-06T19:12:04+08:00">2020-02-06</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>进程间通信（IPC，InterProcess Communication）是指在不同进程之间传播或交换信息。IPC的方式通常有管道（包括无名管道和命名管道）、消息队列、信号量、共享存储、Socket、Streams等。其中 Socket和Streams支持不同主机上的两个进程IPC</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/29/Linux-IPC/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/01/18/c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/18/c/" class="post-title-link" itemprop="url">cpp</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-18 23:53:24" itemprop="dateCreated datePublished" datetime="2020-01-18T23:53:24+08:00">2020-01-18</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-04-26 10:23:28" itemprop="dateModified" datetime="2020-04-26T10:23:28+08:00">2020-04-26</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>c++学习日志</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/18/c/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/11/23/install-wsl-on-a-non-system-drive/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/11/23/install-wsl-on-a-non-system-drive/" class="post-title-link" itemprop="url">install wsl on a non-system drive</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-23 11:50:08 / 修改时间：12:07:20" itemprop="dateCreated datePublished" datetime="2019-11-23T11:50:08+08:00">2019-11-23</time>
+            </span>
+          
+            
+
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>网上好像用软链的方法挺多的，今天不是用软链方式(主要是我失败了)</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/11/23/install-wsl-on-a-non-system-drive/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/10/24/MySql-Password/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/24/MySql-Password/" class="post-title-link" itemprop="url">MySql-Password</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-24 18:30:44" itemprop="dateCreated datePublished" datetime="2019-10-24T18:30:44+08:00">2019-10-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-03 19:49:57" itemprop="dateModified" datetime="2020-02-03T19:49:57+08:00">2020-02-03</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>老生常谈的问题</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/10/24/MySql-Password/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/09/06/create-hostapd-with-ipv4-6-support/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/06/create-hostapd-with-ipv4-6-support/" class="post-title-link" itemprop="url">create hostapd with ipv4&6 support</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-06 21:53:11" itemprop="dateCreated datePublished" datetime="2019-09-06T21:53:11+08:00">2019-09-06</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-01 11:02:05" itemprop="dateModified" datetime="2019-12-01T11:02:05+08:00">2019-12-01</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>捣鼓了这么久，总算是实现在树莓派3b上开启支持ipv4和ipv6的热点，真是不容易,网上各种傻x桥接，根本跑不起来，看着都气人。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/06/create-hostapd-with-ipv4-6-support/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/08/16/banzi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/16/banzi/" class="post-title-link" itemprop="url">banzi</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-16 23:23:40" itemprop="dateCreated datePublished" datetime="2019-08-16T23:23:40+08:00">2019-08-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-17 21:07:32" itemprop="dateModified" datetime="2019-08-17T21:07:32+08:00">2019-08-17</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="simpson"><a href="#simpson" class="headerlink" title="simpson"></a>simpson</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">work</span><span class="params">(<span class="keyword">double</span> L,<span class="keyword">double</span> R)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> mid=(L+R)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> (f(L)+f(R)+f(mid)*<span class="number">4</span>)*(R-L)/<span class="number">6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">simpson</span><span class="params">(<span class="keyword">double</span> L,<span class="keyword">double</span> R)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> mid=(L+R)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">double</span> x1=work(L,mid),x2=work(mid,R),x3=work(L,R);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">std</span>::<span class="built_in">fabs</span>(x1+x2-x3)&lt;eps) <span class="keyword">return</span> x1+x2;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> simpson(L,mid)+simpson(mid,R);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/16/banzi/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ankikong</p>
+  <div class="site-description motion-element" itemprop="description">ankikong's blog</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/ankikong" title="GitHub &rarr; https://github.com/ankikong" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:ankikong@qq.com" title="E-Mail &rarr; mailto:ankikong@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ankikong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1/reading_progress.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+
+  
+
+  <script src="/js/next-boot.js?v=7.3.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

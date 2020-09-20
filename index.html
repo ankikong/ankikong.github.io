@@ -234,7 +234,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/11/23/install-wsl-on-a-non-system-drive/">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/09/20/frida/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ankikong">
@@ -251,7 +251,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/11/23/install-wsl-on-a-non-system-drive/" class="post-title-link" itemprop="url">install wsl on a non-system drive</a>
+                <a href="/2020/09/20/frida/" class="post-title-link" itemprop="url">frida</a>
               
             
           </h2>
@@ -270,7 +270,7 @@
                 
               
 
-              <time title="创建时间：2019-11-23 11:50:08 / 修改时间：12:07:20" itemprop="dateCreated datePublished" datetime="2019-11-23T11:50:08+08:00">2019-11-23</time>
+              <time title="创建时间：2020-09-20 13:20:19 / 修改时间：16:56:48" itemprop="dateCreated datePublished" datetime="2020-09-20T13:20:19+08:00">2020-09-20</time>
             </span>
           
             
@@ -289,11 +289,114 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>网上好像用软链的方法挺多的，今天不是用软链方式(主要是我失败了)</p>
+          
+            <h2 id="windows安装"><a href="#windows安装" class="headerlink" title="windows安装"></a>windows安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install frida frida-tools</span><br></pre></td></tr></table></figure>
+
+<p>不过<code>frida</code>安装时总会卡住不动,可以到<a href="https://pypi.org/project/frida/#files" target="_blank" rel="noopener">这里</a> 选择和你的python版本一致的,注意指令集也要和python的一样.然后直接<code>easy_install xxx.egg</code></p>
+<h2 id="Android安装"><a href="#Android安装" class="headerlink" title="Android安装"></a>Android安装</h2><p>到<a href="https://github.com/frida/frida/releases" target="_blank" rel="noopener">这里</a>下载server,主要要和手机的指令集一致的,解压后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb push server 手机路径</span><br><span class="line">adb shell chmod +x server</span><br><span class="line">forward tcp:27042 tcp:27042</span><br><span class="line">forward tcp:27043 tcp:27043</span><br><span class="line">adb shell ./server</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>python脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">js = open(<span class="string">"code/frida/a.js"</span>, encoding=<span class="string">"utf8"</span>).read()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_message</span><span class="params">(message, data)</span>:</span></span><br><span class="line">    print(data)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> [<span class="string">"stack"</span>, <span class="string">"description"</span>]:</span><br><span class="line">        msg = message.get(k)</span><br><span class="line">        <span class="keyword">if</span> msg <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            print(msg)</span><br><span class="line"></span><br><span class="line">session = frida.get_remote_device().attach(<span class="string">'com.picacomic.fregata'</span>)</span><br><span class="line">script = session.create_script(js)</span><br><span class="line">script.on(<span class="string">'message'</span>, on_message)</span><br><span class="line">script.load()</span><br><span class="line"></span><br><span class="line">sys.stdin.read()</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>获取非native方法的输入值和返回值,这里的方法为 <code>String c([]String)</code></p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Java.available) &#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> MyApplication = Java.use(<span class="string">'com.picacomic.fregata.MyApplication'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(MyApplication);</span><br><span class="line">        MyApplication.c.implementation = <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"param:"</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(v);</span><br><span class="line">            <span class="keyword">var</span> ret = <span class="keyword">this</span>.c(v);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"return value:"</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(ret);</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"load java failed"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取native方法的输入值和返回值,这里的方法是 <code>String getStringSigFromNative();</code></p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Java.available) &#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        Interceptor.attach(Module.findExportByName(<span class="string">"libJniTest.so"</span>, <span class="string">"Java_com_picacomic_fregata_MyApplication_getStringSigFromNative"</span>), &#123;</span><br><span class="line">            <span class="comment">// onEnter 是方法开始前调用的,args[0]是env,args[1]是jclass,args[2...]就是方法的输入值了</span></span><br><span class="line">            onEnter: <span class="function"><span class="keyword">function</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">                send(args[<span class="number">0</span>]);</span><br><span class="line">                send(args[<span class="number">1</span>]);</span><br><span class="line">            &#125;,</span><br><span class="line">            onLeave: <span class="function"><span class="keyword">function</span>(<span class="params">ret</span>) </span>&#123;</span><br><span class="line">                send(<span class="string">"ret:"</span> + Java.vm.getEnv().getStringUtfChars(ret, <span class="literal">null</span>).readCString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"load java failed"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>Java_com_picacomic_fregata_MyApplication_getStringSigFromNative</code>是查so文件得到的方法名,非java源码里面的名称.可以把 .so抠出来,丢到linux里面,然后 <code>nm -D libJniTest.so</code>,输出大概长这样<br><img src="../images/native1.png" alt="native1"></p>
+<h2 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h2><p>打印String VAL 需要用 <code>Java.vm.getEnv().getStringUtfChars(VAL, null).readCString()</code>,不然打出来是个地址</p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/04/07/mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/04/07/mysql/" class="post-title-link" itemprop="url">mysql</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-07 20:49:49 / 修改时间：22:48:17" itemprop="dateCreated datePublished" datetime="2020-04-07T20:49:49+08:00">2020-04-07</time>
+            </span>
+          
+            
+
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>mysql 学习日记</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/11/23/install-wsl-on-a-non-system-drive/#more" rel="contents">
+              <a class="btn" href="/2020/04/07/mysql/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -324,7 +427,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/10/24/MySql-Password/">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/03/20/redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ankikong">
@@ -341,7 +444,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/10/24/MySql-Password/" class="post-title-link" itemprop="url">MySql-Password</a>
+                <a href="/2020/03/20/redis/" class="post-title-link" itemprop="url">redis</a>
               
             
           </h2>
@@ -360,7 +463,7 @@
                 
               
 
-              <time title="创建时间：2019-10-24 18:30:44 / 修改时间：18:44:50" itemprop="dateCreated datePublished" datetime="2019-10-24T18:30:44+08:00">2019-10-24</time>
+              <time title="创建时间：2020-03-20 21:56:39 / 修改时间：22:51:23" itemprop="dateCreated datePublished" datetime="2020-03-20T21:56:39+08:00">2020-03-20</time>
             </span>
           
             
@@ -379,16 +482,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>老生常谈的问题</p>
-          <!--noindex-->
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/10/24/MySql-Password/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
+            <h2 id="简单动态字符串-SDS"><a href="#简单动态字符串-SDS" class="headerlink" title="简单动态字符串(SDS)"></a>简单动态字符串(SDS)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">attribute__</span> ((__<span class="title">packed__</span>)) <span class="title">sdshdr8</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint8_t</span> len; <span class="comment">// 字符串长度</span></span><br><span class="line">    <span class="keyword">uint8_t</span> alloc; <span class="comment">// 不包括头部长度和结束符长度</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> flags; <span class="comment">/* 3 lsb of type, 5 unused bits */</span></span><br><span class="line">    <span class="keyword">char</span> buf[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不包括头的意思是:redis在新建完sds,并不会直接返回这个结构体,而是返回buf的地址,这样就可以直接使用<code>string.h</code>里面的方法进行处理,所以下面:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SDS_HDR(T,s) ((struct sdshdr##T *)((s)-(sizeof(struct sdshdr##T))))</span></span><br></pre></td></tr></table></figure>
+
+<p>这个就是输入T(是sdshdrT),s就是字符串的首地址,这样处理就可以通过字符串的首地址获得整个结构体</p>
+<h2 id="ziplist"><a href="#ziplist" class="headerlink" title="ziplist"></a>ziplist</h2><p>结构为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+-------+----------------------------</span><br><span class="line">|4 byte |4 byte |2 byte |</span><br><span class="line">+-------+</span><br><span class="line">|zlbytes|zltail |entries|</span><br></pre></td></tr></table></figure>
           
-          <!--/noindex-->
         
       
     </div>
@@ -414,7 +517,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/09/06/create-hostapd-with-ipv4-6-support/">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/25/Rust-learning-note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ankikong">
@@ -431,7 +534,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/09/06/create-hostapd-with-ipv4-6-support/" class="post-title-link" itemprop="url">create hostapd with ipv4&6 support</a>
+                <a href="/2020/02/25/Rust-learning-note/" class="post-title-link" itemprop="url">Rust learning note</a>
               
             
           </h2>
@@ -450,7 +553,7 @@
                 
               
 
-              <time title="创建时间：2019-09-06 21:53:11" itemprop="dateCreated datePublished" datetime="2019-09-06T21:53:11+08:00">2019-09-06</time>
+              <time title="创建时间：2020-02-25 23:47:50" itemprop="dateCreated datePublished" datetime="2020-02-25T23:47:50+08:00">2020-02-25</time>
             </span>
           
             
@@ -463,7 +566,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-12-01 11:02:05" itemprop="dateModified" datetime="2019-12-01T11:02:05+08:00">2019-12-01</time>
+                <time title="修改时间：2020-02-27 21:32:56" itemprop="dateModified" datetime="2020-02-27T21:32:56+08:00">2020-02-27</time>
               </span>
             
           
@@ -479,11 +582,106 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>捣鼓了这么久，总算是实现在树莓派3b上开启支持ipv4和ipv6的热点，真是不容易,网上各种傻x桥接，根本跑不起来，看着都气人。</p>
+          
+            <h2 id="Option-lt-T-gt"><a href="#Option-lt-T-gt" class="headerlink" title="Option&lt;T&gt;"></a>Option&lt;T&gt;</h2><p>像C#的nullable，就是使没有支持null(None)的数据类型增加null(None)这个取值,要用Some(x)进行解包</p>
+<h2 id="变量所有权"><a href="#变量所有权" class="headerlink" title="变量所有权"></a>变量所有权</h2><p>一个变量只能拥有一个可写的引用,但是可以拥有多个只读引用,读与写引用互斥.</p>
+<p>栈上变量直接赋值,会直接复制,不会转移所有权.但是堆上变量赋值如果没有使用clone(),则会转移所有权,转移后原来变量名失去所有权,使用的话会在编译阶段报错</p>
+<p>函数如果没有传引用的话,会把所有权转移到被调用函数中</p>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 表示a,b和返回值有相同的生命周期</span></span><br><span class="line"><span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">t3</span></span>&lt;<span class="symbol">'a</span>, T&gt; (a:&amp;<span class="symbol">'a</span> T, b:&amp;<span class="symbol">'a</span> T) -&gt; &amp;<span class="symbol">'a</span> T</span><br><span class="line">    <span class="keyword">where</span> T: cmp::<span class="built_in">PartialOrd</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> a &gt; b &#123;</span><br><span class="line">        a</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        b</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>静态生命周期</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s: &amp;<span class="symbol">'static</span> <span class="built_in">str</span> = <span class="string">"455"</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="trait"><a href="#trait" class="headerlink" title="trait"></a>trait</h2><p>很像接口</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pub</span> <span class="class"><span class="keyword">trait</span> <span class="title">Ahh</span></span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">say</span></span>(&amp;<span class="keyword">self</span>) -&gt; <span class="built_in">String</span> &#123;</span><br><span class="line">        <span class="built_in">String</span>::from(<span class="string">"ahhhhh"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">pub</span> <span class="class"><span class="keyword">struct</span> <span class="title">Bhh</span></span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">impl</span> Ahh <span class="keyword">for</span> Bhh &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">say</span></span>(&amp;<span class="keyword">self</span>) -&gt; <span class="built_in">String</span> &#123;</span><br><span class="line">        <span class="built_in">String</span>::from(<span class="string">"ffffff"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/14/IP-in-China/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/14/IP-in-China/" class="post-title-link" itemprop="url">IP是否在中国</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-14 21:50:10 / 修改时间：22:30:06" itemprop="dateCreated datePublished" datetime="2020-02-14T21:50:10+08:00">2020-02-14</time>
+            </span>
+          
+            
+
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>由于某些不可名状的原因,国内dns有点脏</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/09/06/create-hostapd-with-ipv4-6-support/#more" rel="contents">
+              <a class="btn" href="/2020/02/14/IP-in-China/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -514,7 +712,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/08/16/banzi/">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/11/TCP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ankikong">
@@ -531,7 +729,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/16/banzi/" class="post-title-link" itemprop="url">banzi</a>
+                <a href="/2020/02/11/TCP/" class="post-title-link" itemprop="url">TCP</a>
               
             
           </h2>
@@ -550,7 +748,237 @@
                 
               
 
-              <time title="创建时间：2019-08-16 23:23:40" itemprop="dateCreated datePublished" datetime="2019-08-16T23:23:40+08:00">2019-08-16</time>
+              <time title="创建时间：2020-02-11 22:37:16 / 修改时间：23:11:50" itemprop="dateCreated datePublished" datetime="2020-02-11T22:37:16+08:00">2020-02-11</time>
+            </span>
+          
+            
+
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一种面向连接的、可靠的、<strong>基于字节流</strong>的传输层通信协议</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/02/11/TCP/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/10/zero-copy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/10/zero-copy/" class="post-title-link" itemprop="url">zero copy</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-10 20:51:03 / 修改时间：23:45:32" itemprop="dateCreated datePublished" datetime="2020-02-10T20:51:03+08:00">2020-02-10</time>
+            </span>
+          
+            
+
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>由于Linux文件读写是对缓存进行操作的,虽说可以减少对磁盘的读写,但是数据拷贝时会消耗大量CPU资源.零拷贝<code>zero-copy</code>这种技术可以有效地改善数据传输的性能，在内核驱动程序（比如网络堆栈或者磁盘存储驱动程序）处理 I/O 数据的时候，零拷贝技术可以在某种程度上减少甚至完全避免不必要 CPU 数据拷贝操作。<br>但是只能用于单纯的文件传输,无法实现文件修改后再传输<br>正常文件拷贝传输,是由内核拷贝到缓冲区,然后内核再把数据写到用户所给内存,再写到socket缓冲区,最后再交付</p>
+<p><img src="../images/zero-copy1.jpg" alt="zero1"></p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
+<li>直接 I/O：对于这种数据传输方式来说，应用程序可以直接访问硬件存储，操作系统内核只是辅助数据传输：这类零拷贝技术针对的是操作系统内核并不需要对数据进行直接处理的情况，数据可以在应用程序地址空间的缓冲区和磁盘之间直接进行传输，完全不需要 Linux 操作系统内核提供的页缓存的支持。</li>
+<li>在数据传输的过程中，避免数据在操作系统内核地址空间的缓冲区和用户应用程序地址空间的缓冲区之间进行拷贝。有的时候，应用程序在数据进行传输的过程中不需要对数据进行访问，那么，将数据从 Linux 的页缓存拷贝到用户进程的缓冲区中就可以完全避免，传输的数据在页缓存中就可以得到处理。在某些特殊的情况下，这种零拷贝技术可以获得较好的性能。Linux 中提供类似的系统调用主要有 <code>mmap()</code>，<code>sendfile()</code> 以及 <code>splice()</code>。</li>
+<li>对数据在 Linux 的页缓存和用户进程的缓冲区之间的传输过程进行优化。该零拷贝技术侧重于灵活地处理数据在用户进程的缓冲区和操作系统的页缓存之间的拷贝操作。这种方法延续了传统的通信方式，但是更加灵活。在 Linux 中，该方法主要利用了写时复制技术</li>
+</ul>
+<h3 id="直接I-O"><a href="#直接I-O" class="headerlink" title="直接I/O"></a>直接I/O</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// flag使用O_DIRECT</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> oflag, … <span class="comment">/*, mode_t mode */</span> )</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="针对数据传输不需要经过应用程序地址空间的零拷贝技术"><a href="#针对数据传输不需要经过应用程序地址空间的零拷贝技术" class="headerlink" title="针对数据传输不需要经过应用程序地址空间的零拷贝技术"></a>针对数据传输不需要经过应用程序地址空间的零拷贝技术</h3><h4 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmp_buf = mmap(file, len);</span><br><span class="line">write(socket, tmp_buf, len);</span><br></pre></td></tr></table></figure>
+
+<p>应用程序调用了 mmap() 之后，数据会先通过 DMA 拷贝到操作系统内核的缓冲区中去。接着，<strong>应用程序跟操作系统共享这个缓冲区</strong>，这样，操作系统内核和应用程序存储空间就不需要再进行任何的数据拷贝操作。应用程序调用了 write() 之后，操作系统内核将数据从原来的内核缓冲区中拷贝到与 socket 相关的内核缓冲区中。接下来，数据从内核 socket 缓冲区拷贝到协议引擎中去，这是第三次数据拷贝操作</p>
+<p><img src="../images/zero-copy2.jpg" alt="zero2"></p>
+<p>当对文件进行了内存映射，然后调用 write() 系统调用，如果此时其他的进程截断了这个文件，那么 write() 系统调用将会被总线错误信号 SIGBUS 中断，因为此时正在执行的是一个错误的存储访问。这个信号将会导致进程被杀死，解决这个问题可以通过以下这两种方法：</p>
+<ol>
+<li>为 SIGBUS 安装一个新的信号处理器</li>
+<li>第二种方法是通过文件租借锁来解决这个问题的，这种方法相对来说更好一些。我们可以通过内核对文件加读或者写的租借锁，当另外一个进程尝试对用户正在进行传输的文件进行截断的时候，内核会发送给用户一个实时信号：RT_SIGNAL_LEASE 信号，这个信号会告诉用户内核破坏了用户加在那个文件上的写或者读租借锁，那么 write() 系统调用则会被中断，并且进程会被 SIGBUS 信号杀死，返回值则是中断前写的字节数，errno 也会被设置为 success。文件租借锁需要在对文件进行内存映射之前设置。</li>
+</ol>
+<h4 id="sendfile"><a href="#sendfile" class="headerlink" title="sendfile"></a>sendfile</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> sendfile(<span class="keyword">int</span> out_fd, <span class="keyword">int</span> in_fd, <span class="keyword">off_t</span> *offset, <span class="keyword">size_t</span> count)</span><br></pre></td></tr></table></figure>
+
+<p>sendfile() 系统调用利用 DMA 引擎将文件中的数据拷贝到操作系统内核缓冲区中，然后数据被拷贝到与 socket 相关的内核缓冲区中去。接下来，DMA 引擎将数据从内核 socket 缓冲区中拷贝到协议引擎中去。如果在用户调用 sendfile () 系统调用进行数据传输的过程中有其他进程截断了该文件，那么 sendfile () 系统调用会简单地返回给用户应用程序中断前所传输的字节数，errno 会被设置为 success。如果在调用 sendfile() 之前操作系统对文件加上了租借锁，那么 sendfile() 的操作和返回状态将会和 mmap()/write () 一样</p>
+<p><img src="../images/zero-copy3.jpg" alt="zero3"><br>sendfile() 系统调用<strong>不需要将数据拷贝或者映射到应用程序地址空间中去</strong>，所以 sendfile() 只是<strong>适用于应用程序地址空间不需要对所访问数据进行处理的情况</strong>。相对于 mmap() 方法来说，因为 sendfile 传输的数据没有越过用户应用程序 / 操作系统内核的边界线，所以 sendfile () 也极大地减少了存储管理的开销。</p>
+<ol>
+<li>sendfile() 局限于基于文件服务的网络应用程序</li>
+<li>由于网络传输具有异步性，很难在 sendfile () 系统调用的接收端进行配对的实现方式，所以数据传输的接收端一般没有用到这种技术</li>
+<li>基于性能的考虑来说，sendfile () 仍然需要有一次从文件到 socket 缓冲区的 CPU 拷贝操作，这就导致页缓存有可能会被传输的数据所污染</li>
+</ol>
+<h4 id="splice"><a href="#splice" class="headerlink" title="splice"></a>splice</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="keyword">ssize_t</span> splice(<span class="keyword">int</span> fd_in, <span class="keyword">loff_t</span> *off_in, <span class="keyword">int</span> fd_out,</span><br><span class="line">            <span class="keyword">loff_t</span> *off_out, <span class="keyword">size_t</span> len, <span class="keyword">unsigned</span> <span class="keyword">int</span> flags)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在 Linux 2.6.23 中,sendfile由splice实现  </p>
+</blockquote>
+<p>调用 splice() 系统调用会导致操作系统内核从数据源 fdin 移动最多 len 个字节的数据到 fdout 中去，这个数据的移动过程只是经过操作系统内核空间，需要最少的拷贝次数。使用 splice() 系统调用需要这两个文件描述符中的一个必须是用来表示一个管道设备的。不难看出，这种设计具有局限性。</p>
+<ul>
+<li><p><code>fd_in</code>参数是待输入描述符。如果它是一个管道文件描述符，则<code>off_in</code>必须设置为NULL；如果<code>off_in</code>不是一个管道文件描述符（比如socket），那么<code>off_in</code>表示从输入数据流的何处开始读取数据，此时若为NULL，则从输入数据流的当前偏移位置读入</p>
+</li>
+<li><p><code>fd_out/off_out</code>参数的含义与<code>fd_in/off_in</code>相同，不过用于输出数据流</p>
+</li>
+<li><p>len参数指定移动数据的长度</p>
+</li>
+<li><p>参数 flags 用于表示拷贝操作的执行方法，当前的 flags 有如下这些取值：</p>
+<ol>
+<li><code>SPLICE_F_NONBLOCK</code>：splice 操作不会被阻塞。然而，如果文件描述符没有被设置为不可被阻塞方式的 I/O ，那么调用 splice 有可能仍然被阻塞。</li>
+<li><code>SPLICE_F_MORE</code>：告知操作系统内核下一个 splice 系统调用将会有更多的数据传来。</li>
+<li><code>SPLICE_F_MOVE</code>：如果输出是文件，这个值则会使得操作系统内核尝试从输入管道缓冲区直接将数据读入到输出地址空间，这个数据传输过程没有任何数据拷贝操作发生</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建管道</span></span><br><span class="line">ret = pipe(pipefd);</span><br><span class="line"><span class="comment">//将connfd上流入的客户端数据定向到管道中</span></span><br><span class="line">ret = splice(connfd, <span class="literal">NULL</span>, pipefd[<span class="number">1</span>], <span class="literal">NULL</span>, <span class="number">32768</span>, SPLICE_F_MORE | SPLICE_F_MOVE);</span><br><span class="line"><span class="comment">//将管道的输出定向到connfd连接文件符上</span></span><br><span class="line">ret = splice(pipefd[<span class="number">0</span>], <span class="literal">NULL</span>, connfd, <span class="literal">NULL</span>, <span class="number">32768</span>, SPLICE_F_MORE | SPLICE_F_MOVE);</span><br></pre></td></tr></table></figure>
+
+<h3 id="写时复制-Copy-On-Write-COW"><a href="#写时复制-Copy-On-Write-COW" class="headerlink" title="写时复制 Copy On Write(COW)"></a>写时复制 Copy On Write(COW)</h3><p>如果有多个应用程序需要<strong>同时访问同一块数据，那么可以为这些应用程序分配指向这块数据的指针</strong>，在每一个应用程序看来，它们都拥有这块数据的一份数据拷贝，当其中一个应用程序<strong>需要对自己的这份数据拷贝进行修改的时候，就需要将数据真正地拷贝到该应用程序的地址空间</strong>中去，也就是说，该应用程序拥有了一份真正的私有数据拷贝，这样做是为了避免该应用程序对这块数据做的更改被其他应用程序看到。这个过程对于应用程序来说是透明的，如果应用程序永远不会对所访问的这块数据进行任何更改，那么就永远不需要将数据拷贝到应用程序自己的地址空间中去。这也是写时复制的最主要的优点。</p>
+<p>写时复制的实现需要 MMU 的支持，MMU 需要知晓进程地址空间中哪些特殊的页面是只读的，当需要往这些页面中写数据的时候，MMU 就会发出一个异常给操作系统内核，操作系统内核就会分配新的物理存储空间，即将被写入数据的页面需要与新的物理存储位置相对应。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-zerocopy1/index.html" target="_blank" rel="noopener">Linux 中的零拷贝技术，第 1 部分</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-zerocopy2/index.html" target="_blank" rel="noopener">Linux 中的零拷贝技术，第 2 部分</a></li>
+<li><a href="http://man7.org/linux/man-pages/man2/splice.2.html" target="_blank" rel="noopener">Linux Programmer’s Manual</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/10/note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/10/note/" class="post-title-link" itemprop="url">笔记</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-10 14:18:24" itemprop="dateCreated datePublished" datetime="2020-02-10T14:18:24+08:00">2020-02-10</time>
             </span>
           
             
@@ -563,7 +991,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-17 21:07:32" itemprop="dateModified" datetime="2019-08-17T21:07:32+08:00">2019-08-17</time>
+                <time title="修改时间：2020-04-05 23:51:59" itemprop="dateModified" datetime="2020-04-05T23:51:59+08:00">2020-04-05</time>
               </span>
             
           
@@ -579,11 +1007,155 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="simpson"><a href="#simpson" class="headerlink" title="simpson"></a>simpson</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">work</span><span class="params">(<span class="keyword">double</span> L,<span class="keyword">double</span> R)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> mid=(L+R)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> (f(L)+f(R)+f(mid)*<span class="number">4</span>)*(R-L)/<span class="number">6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">simpson</span><span class="params">(<span class="keyword">double</span> L,<span class="keyword">double</span> R)</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> mid=(L+R)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">double</span> x1=work(L,mid),x2=work(mid,R),x3=work(L,R);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">std</span>::<span class="built_in">fabs</span>(x1+x2-x3)&lt;eps) <span class="keyword">return</span> x1+x2;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> simpson(L,mid)+simpson(mid,R);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+            <a id="more"></a>
+
+<h2 id="Reactor"><a href="#Reactor" class="headerlink" title="Reactor"></a>Reactor</h2><blockquote>
+<p>Reactor 要求主线程或内核负责监听文件描述符是否有事件发生,有的话立刻告知线程.数据读写全部由控制线程负责.同步io</p>
+</blockquote>
+<p>epoll就是这种方式</p>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><ol>
+<li><code>event demultiplexer</code>事件多路分发器,如<code>select,poll,epoll</code></li>
+<li><code>handle</code>事件源:用于识别每一个事件,Linux上是文件描述符</li>
+<li><code>Reactor</code>反应器,用于管理事件的调度和注册删除</li>
+<li><code>event handler</code>事件处理器:管理已经注册的事件和已经激活等待调度的事件,并分成了不同类型的事件(如读/写、信号),当事件发生时,会提供对应的处理程序。由<code>Reactor</code>调用。</li>
+</ol>
+<h2 id="Proactor"><a href="#Proactor" class="headerlink" title="Proactor"></a>Proactor</h2><blockquote>
+<p>Proactor 所有io操作由主线程或者内核负责,控制线程只负责业务逻辑，异步io</p>
+</blockquote>
+<p>aio</p>
+<h2 id="timewait"><a href="#timewait" class="headerlink" title="timewait"></a>timewait</h2><ul>
+<li><p>TCP四次挥手中,主动方在发送第二个ACK后的2MSL(max segment lifetime)时间之内,RFC推荐是2MSL=120,Linux内核2MSL=60s</p>
+</li>
+<li><p>目的:防止ACK包丢失,等待是否有被动方重发的seq</p>
+</li>
+<li><p>解决方法:</p>
+<ul>
+<li>编程时使用<code>SO_REUSEADDR</code></li>
+<li>Linux里</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 启动TCP ts,tcp_tw_reuse和.tcp_tw_recycle依赖此实现</span><br><span class="line">net.ipv4.tcp_timestamps=1</span><br><span class="line"># 复用TIME_WAIT的socket</span><br><span class="line">net.ipv4.tcp_tw_reuse=1</span><br><span class="line"># 销毁TIME_WAIT的socket,由于nat可能会导致无法握手</span><br><span class="line">net.ipv4.tcp_tw_recycle=1</span><br><span class="line"># 重设超时</span><br><span class="line">net.ipv4.tcp_fin_timeout=30</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Linux-IO模型"><a href="#Linux-IO模型" class="headerlink" title="Linux IO模型"></a>Linux IO模型</h2><ul>
+<li>阻塞IO</li>
+<li>非阻塞IO</li>
+<li>IO复用</li>
+<li>信号驱动IO</li>
+<li>异步IO</li>
+</ul>
+<h2 id="僵尸进程解决"><a href="#僵尸进程解决" class="headerlink" title="僵尸进程解决"></a>僵尸进程解决</h2><ol>
+<li><p>两次fork.父进程创建子进程,子进程负责fork孙子进程,孙子进程负责执行逻辑业务,子进程fork完孙子线程后直接exit.孙子进程变成孤儿线程,交由init管理</p>
+</li>
+<li><p>子进程在结束时会向父线程发送<code>SIGCHLD</code>.父进程只要在信号处理函数中wait,进行子进程的PCB进行回收</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sig_child</span><span class="params">(<span class="keyword">int</span> signo)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">pid_t</span> pid;</span><br><span class="line">    <span class="keyword">int</span> stat;</span><br><span class="line">    <span class="comment">//处理僵尸进程</span></span><br><span class="line">    <span class="keyword">while</span> ((pid = waitpid(<span class="number">-1</span>, &amp;stat, WNOHANG)) &gt;<span class="number">0</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"child %d terminated.\n"</span>, pid);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    signal(SIGCHLD, sig_child);</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>忽略请求</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">signal(SIGCLD, SIG_IGN);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="一致性hash"><a href="#一致性hash" class="headerlink" title="一致性hash"></a>一致性hash</h2><p>哈希值映射到圆环，节点分布在环上，顺时针的第一个节点就是数据存取节点</p>
+<h2 id="RVO-return-value-optimization-和NRVO-named-return-value-optimization"><a href="#RVO-return-value-optimization-和NRVO-named-return-value-optimization" class="headerlink" title="RVO (return value optimization) 和NRVO (named return value optimization)"></a>RVO (return value optimization) 和NRVO (named return value optimization)</h2><h2 id="Traits"><a href="#Traits" class="headerlink" title="Traits"></a>Traits</h2><p>被其他object或algorithm使用的，用来携带信息的object</p>
+<p>实现：<strong>模板的特化与偏特化</strong></p>
+
+          
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/06/cloudflare/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+    </span>
+      <header class="post-header">
+
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/02/06/cloudflare/" class="post-title-link" itemprop="url">cloudflare</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-06 13:42:53" itemprop="dateCreated datePublished" datetime="2020-02-06T13:42:53+08:00">2020-02-06</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-14 21:49:18" itemprop="dateModified" datetime="2020-02-14T21:49:18+08:00">2020-02-14</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>cloudflare 的服务器支持SNI,所以其实服务器委托在cf上的话,他的ip可以指向cf的任意ip地址,也可以正常访问</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/16/banzi/#more" rel="contents">
+              <a class="btn" href="/2020/02/06/cloudflare/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -614,7 +1186,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/08/16/firstBlog/">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/05/dns/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ankikong">
@@ -631,7 +1203,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/16/firstBlog/" class="post-title-link" itemprop="url">firstBlog</a>
+                <a href="/2020/02/05/dns/" class="post-title-link" itemprop="url">dns</a>
               
             
           </h2>
@@ -650,95 +1222,21 @@
                 
               
 
-              <time title="创建时间：2019-08-16 10:38:39 / 修改时间：19:01:07" itemprop="dateCreated datePublished" datetime="2019-08-16T10:38:39+08:00">2019-08-16</time>
+              <time title="创建时间：2020-02-05 12:21:52" itemprop="dateCreated datePublished" datetime="2020-02-05T12:21:52+08:00">2020-02-05</time>
             </span>
           
             
 
             
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>测试<br>$$ letex test $$<br>$$ x^2+y^2=z^2 $$</p>
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2019/08/16/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ankikong">
-      <meta itemprop="description" content="ankikong's blog">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ankikong">
-    </span>
-      <header class="post-header">
-
-        
-          <h2 class="post-title" itemprop="name headline">
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
                 
+                  <span class="post-meta-item-text">更新于</span>
                 
-                <a href="/2019/08/16/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <time title="修改时间：2020-02-12 23:07:55" itemprop="dateModified" datetime="2020-02-12T23:07:55+08:00">2020-02-12</time>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-16 10:05:43 / 修改时间：10:38:03" itemprop="dateCreated datePublished" datetime="2019-08-16T10:05:43+08:00">2019-08-16</time>
-            </span>
-          
-            
-
             
           
 
@@ -753,22 +1251,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <p>回家后发现家里的新拉的光纤是移动的，但是移动居然对53端口的udp实行完全拦截，也就是dns拦截。想起之前在宿舍使用的cloudflare的json格式的DoH还有DoT，所以决定搞一搞。</p>
+          <!--noindex-->
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/02/05/dns/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
@@ -790,6 +1282,9 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
           </div>
@@ -821,7 +1316,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -850,7 +1345,23 @@
         
           
         
-        <span class="site-state-item-count">7</span>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -896,7 +1407,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -959,6 +1470,14 @@
 
 
   
+    
+      
+    
+      
+    
+      
+    
+      
     
       
     
