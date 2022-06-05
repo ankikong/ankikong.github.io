@@ -58,14 +58,14 @@
 </script>
 
   <meta name="description" content="c++学习日志">
-<meta name="keywords" content="programming,Linux,cpp,network">
+<meta name="keywords" content="Linux,cpp,programming,network">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cpp">
 <meta property="og:url" content="https://ankikong.github.io/2020/01/18/c/index.html">
 <meta property="og:site_name" content="ankikong">
 <meta property="og:description" content="c++学习日志">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-26T02:23:28.735Z">
+<meta property="og:updated_time" content="2022-02-20T06:08:49.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cpp">
 <meta name="twitter:description" content="c++学习日志">
@@ -284,7 +284,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-04-26 10:23:28" itemprop="dateModified" datetime="2020-04-26T10:23:28+08:00">2020-04-26</time>
+                <time title="修改时间：2022-02-20 14:08:49" itemprop="dateModified" datetime="2022-02-20T14:08:49+08:00">2022-02-20</time>
               </span>
             
           
@@ -386,7 +386,7 @@
 <p>有了虚函数，程序甚至能够调用编译期还不存在的函数。</p>
 <p>在 C++ 中，在基类的成员函数声明前加上关键字 <code>virtual</code> 即可让该函数成为<strong>虚函数</strong>，派生类中对此函数的不同实现都会继承这一修饰符，允许后续派生类覆盖，达到迟绑定的效果。即便是基类中的成员函数调用虚函数，也会调用到派生类中的版本。</p>
 <p>实现：虚函数表和虚表指针</p>
-<h3 id="虚函数表"><a href="#虚函数表" class="headerlink" title="虚函数表"></a>虚函数表</h3><p>虚函数表,每个含有虚函数的类都含有一份,同一类的实例共享同一份虚函数表,虚函数表位于类的最前面.虚函数表按声明顺序保存着类的所有虚函数指针.多重继承中,虚函数表的顺序按继承顺序保存</p>
+<h3 id="虚函数表"><a href="#虚函数表" class="headerlink" title="虚函数表"></a>虚函数表</h3><p>虚函数表,每个含有虚函数的类都含有一份,同一类的实例共享同一份虚函数表,虚函数表位于类的最前面.虚函数表按声明顺序保存着类的所有虚函数指针.<strong>多重继承中,虚函数表的顺序按继承顺序保存</strong>。<br>对象的大小：取决于继承了几个类。无虚函数的空类，大小是1。含有虚函数，大小是一个指针。继承了含有虚函数的父类，大小是继承数量*指针大小</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">a</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"a()\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">b</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"b()\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span><span class="params">(*Func)</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A aa;</span><br><span class="line">    ll** tab=(ll**)&amp;aa;</span><br><span class="line">    Func fa = (Func)tab[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">    Func fb = (Func)tab[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">    fa(); fb();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>纯虚函数：virtual int say() = 0;相当于抽象函数</p>
@@ -504,7 +504,7 @@
 <p>packed: 变量或结构域以最小对齐单位对齐，如变量以字节对齐，结构域以位对齐</p>
 <h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fun(x) #x <span class="comment">// 如果调用fun(abc),则会转为"abc",即参数的变量名</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fun(x) ahh#x <span class="comment">//fun(abc),abc=1的话,展开为变量:ahh1</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(push)  <span class="comment">// 保存对齐状态</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(4)     <span class="comment">// 设定为 4 字节对齐</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(pop)</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="拷贝构造函数和赋值运算符"><a href="#拷贝构造函数和赋值运算符" class="headerlink" title="拷贝构造函数和赋值运算符"></a>拷贝构造函数和赋值运算符</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拷贝构造函数,被赋值对象是新建的</span></span><br><span class="line"><span class="comment">// 在Person a=b;时调用</span></span><br><span class="line"><span class="comment">// 可以写为Person a(b);</span></span><br><span class="line">Person(<span class="keyword">const</span> Person&amp; p) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="comment">// 赋值运算符,被赋值的对象是已有的</span></span><br><span class="line"><span class="comment">// 在Person a;</span></span><br><span class="line"><span class="comment">// a=b;时调用</span></span><br><span class="line">Person&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Person&amp; p) = <span class="keyword">delete</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="拷贝构造函数和赋值运算符"><a href="#拷贝构造函数和赋值运算符" class="headerlink" title="拷贝构造函数和赋值运算符"></a>拷贝构造函数和赋值运算符</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拷贝构造函数,被赋值对象是新建的</span></span><br><span class="line"><span class="comment">// 在Person a=b;时调用</span></span><br><span class="line"><span class="comment">// 可以写为Person a(b);</span></span><br><span class="line">Person(<span class="keyword">const</span> Person&amp; p);</span><br><span class="line"><span class="comment">// 赋值运算符,被赋值的对象是已有的</span></span><br><span class="line"><span class="comment">// 在 Person a; a=b; 时调用</span></span><br><span class="line">Person&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Person&amp; p);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移动构造函数</span></span><br><span class="line"><span class="comment">// Person b(std::move(a)), b=std::move(a);</span></span><br><span class="line">Person(Person&amp;&amp; p);</span><br><span class="line"><span class="comment">// 移动赋值运算符</span></span><br><span class="line"><span class="comment">// Person a,b; a=std::move(b);</span></span><br><span class="line">Person&amp; <span class="keyword">operator</span>=(Person&amp;&amp; p);</span><br></pre></td></tr></table></figure>
 
 <p>std::move()转移所有权,被move的元素,会失去对原来值的所有权.(如容器类,则会被清空)</p>
 <p>std::forward()直接转发,不修改值的左右值属性</p>
@@ -523,11 +523,11 @@
           
         
         <div class="post-tags">
-            <a href="/tags/programming/" rel="tag"># programming</a>
-          
             <a href="/tags/Linux/" rel="tag"># Linux</a>
           
             <a href="/tags/cpp/" rel="tag"># cpp</a>
+          
+            <a href="/tags/programming/" rel="tag"># programming</a>
           
             <a href="/tags/network/" rel="tag"># network</a>
           
@@ -598,7 +598,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -645,7 +645,17 @@
         
           
         
-        <span class="site-state-item-count">16</span>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -708,7 +718,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
