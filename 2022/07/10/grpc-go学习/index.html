@@ -57,18 +57,18 @@
   };
 </script>
 
-  <meta name="description" content="简单应答服务安装idl转换工具 12go install google.golang.org/protobuf/cmd/protoc-gen-gogo install google.golang.org/grpc/cmd/protoc-gen-go-grpc  然后写一份proto 1234567891011121314151617// 注意要是 proto3 ，只有3才支持 service">
+  <meta name="description" content="学学 grpc-go，顺便整整优化">
 <meta name="keywords" content="grpc,go">
 <meta property="og:type" content="article">
 <meta property="og:title" content="grpc-go学习">
 <meta property="og:url" content="https://ankikong.github.io/2022/07/10/grpc-go学习/index.html">
 <meta property="og:site_name" content="ankikong">
-<meta property="og:description" content="简单应答服务安装idl转换工具 12go install google.golang.org/protobuf/cmd/protoc-gen-gogo install google.golang.org/grpc/cmd/protoc-gen-go-grpc  然后写一份proto 1234567891011121314151617// 注意要是 proto3 ，只有3才支持 service">
+<meta property="og:description" content="学学 grpc-go，顺便整整优化">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-07-10T14:06:31.064Z">
+<meta property="og:updated_time" content="2022-07-10T14:26:49.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="grpc-go学习">
-<meta name="twitter:description" content="简单应答服务安装idl转换工具 12go install google.golang.org/protobuf/cmd/protoc-gen-gogo install google.golang.org/grpc/cmd/protoc-gen-go-grpc  然后写一份proto 1234567891011121314151617// 注意要是 proto3 ，只有3才支持 service">
+<meta name="twitter:description" content="学学 grpc-go，顺便整整优化">
   <link rel="canonical" href="https://ankikong.github.io/2022/07/10/grpc-go学习/">
 
 
@@ -271,7 +271,7 @@
                 
               
 
-              <time title="创建时间：2022-07-10 21:40:06 / 修改时间：22:06:31" itemprop="dateCreated datePublished" datetime="2022-07-10T21:40:06+08:00">2022-07-10</time>
+              <time title="创建时间：2022-07-10 21:40:06 / 修改时间：22:26:49" itemprop="dateCreated datePublished" datetime="2022-07-10T21:40:06+08:00">2022-07-10</time>
             </span>
           
             
@@ -290,7 +290,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <a id="more"></a>
+        <p>学学 grpc-go，顺便整整优化</p>
+<a id="more"></a>
 
 <h2 id="简单应答服务"><a href="#简单应答服务" class="headerlink" title="简单应答服务"></a>简单应答服务</h2><p>安装idl转换工具</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go install google.golang.org/protobuf/cmd/protoc-gen-go</span><br><span class="line">go install google.golang.org/grpc/cmd/protoc-gen-go-grpc</span><br></pre></td></tr></table></figure>
