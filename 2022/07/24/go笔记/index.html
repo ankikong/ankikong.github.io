@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="个人笔记">
-<meta name="keywords" content="programming,golang">
+  <meta name="description" content="总结自己遇过的各种问题">
+<meta name="keywords" content="golang">
 <meta property="og:type" content="article">
-<meta property="og:title" content="golang note">
-<meta property="og:url" content="https://ankikong.github.io/2021/10/06/golang-note/index.html">
+<meta property="og:title" content="go常见代码问题">
+<meta property="og:url" content="https://ankikong.github.io/2022/07/24/go笔记/index.html">
 <meta property="og:site_name" content="ankikong">
-<meta property="og:description" content="个人笔记">
+<meta property="og:description" content="总结自己遇过的各种问题">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2022-07-24T06:03:44.105Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="golang note">
-<meta name="twitter:description" content="个人笔记">
-  <link rel="canonical" href="https://ankikong.github.io/2021/10/06/golang-note/">
+<meta name="twitter:title" content="go常见代码问题">
+<meta name="twitter:description" content="总结自己遇过的各种问题">
+  <link rel="canonical" href="https://ankikong.github.io/2022/07/24/go笔记/">
 
 
 <script id="page.configurations">
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>golang note | ankikong</title>
+  <title>go常见代码问题 | ankikong</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129656297-1"></script>
   <script>
@@ -237,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2021/10/06/golang-note/">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2022/07/24/go笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ankikong">
@@ -251,7 +251,7 @@
       <header class="post-header">
 
         
-          <h2 class="post-title" itemprop="name headline">golang note
+          <h2 class="post-title" itemprop="name headline">go常见代码问题
 
               
             
@@ -271,21 +271,11 @@
                 
               
 
-              <time title="创建时间：2021-10-06 17:25:10" itemprop="dateCreated datePublished" datetime="2021-10-06T17:25:10+08:00">2021-10-06</time>
+              <time title="创建时间：2022-07-24 11:35:42 / 修改时间：14:03:44" itemprop="dateCreated datePublished" datetime="2022-07-24T11:35:42+08:00">2022-07-24</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2022-07-24 14:03:44" itemprop="dateModified" datetime="2022-07-24T14:03:44+08:00">2022-07-24</time>
-              </span>
             
           
 
@@ -300,24 +290,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>个人笔记</p>
+        <p>总结自己遇过的各种问题</p>
 <a id="more"></a>
 
-<h2 id="编译相关"><a href="#编译相关" class="headerlink" title="编译相关"></a>编译相关</h2><h3 id="race-detector"><a href="#race-detector" class="headerlink" title="race detector"></a>race detector</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go run -race</span><br><span class="line">go build -race</span><br></pre></td></tr></table></figure>
+<h2 id="循环内捕获变量"><a href="#循环内捕获变量" class="headerlink" title="循环内捕获变量"></a>循环内捕获变量</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"sync"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    wg := &amp;sync.WaitGroup&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        wg.Add(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            fmt.Println(i)</span><br><span class="line">            wg.Done()</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>所有内联tag</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool link --help</span><br></pre></td></tr></table></figure>
+<p>这里不是输出0到1，<strong>可能</strong>是10个10，因为捕获的i在后面被修改了，改成加个复制就好了</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"sync"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    wg := &amp;sync.WaitGroup&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        i := i</span><br><span class="line">        wg.Add(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            fmt.Println(i)</span><br><span class="line">            wg.Done()</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>所有gc tag</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool compile --help</span><br></pre></td></tr></table></figure>
+<h2 id="make-slice-的两种写法"><a href="#make-slice-的两种写法" class="headerlink" title="make slice 的两种写法"></a>make slice 的两种写法</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sliceA := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">10</span>)</span><br><span class="line">sliceB := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 
-<h2 id="某些技巧"><a href="#某些技巧" class="headerlink" title="某些技巧"></a>某些技巧</h2><h3 id="runtime-LockOSThread"><a href="#runtime-LockOSThread" class="headerlink" title="runtime.LockOSThread"></a>runtime.LockOSThread</h3><p>runtime.LockOSThread()可以把当前goroutine绑定在物理线程上，但是如果在goroutine绑定后没有UnlockOSThread，就会导致goroutine结束时，这条线程被杀掉</p>
-<h3 id="sync-pool"><a href="#sync-pool" class="headerlink" title="sync.pool"></a>sync.pool</h3><ol>
-<li>使用lock-free的双向队列作为缓存</li>
-<li>使用victim作为待gc缓存，每次gc开头，把victim队列的东西清空，然后把local队列转到victim队列</li>
-<li>在获取时，优先在local，然后victim，然后去别的p的pool拿，最后使用New。local中优先使用无锁的private(pin了，不会有竞争)，没有再从shared拿，可以pushHead/popHead，别的p只能popTail</li>
-<li>每个P享有一个pool。G操作pool时，需要锁P</li>
-</ol>
+<p>第一种是创建一个slice，容量和长度都是10，可以直接 <code>sliceA[index]</code> 下标访问，初始值是该类型的默认值，比如bool是false，int是0，指针是nil<br>第二种是创建一个slice，容量是10，长度是0，不能直接下标访问，必须要先 <code>sliceB=append(sliceB, 1)</code>后，有数据了才能下标访问<br>slice进行append时不是协程安全的，多协程同时append需要加锁。</p>
+<h2 id="time-Since-优化"><a href="#time-Since-优化" class="headerlink" title="time.Since 优化"></a>time.Since 优化</h2><p>Since在1.16后做了一次优化，使用了runtime的纳秒计数器，少了一次调用 now()，优化了一次syscall。调用的 <code>runtimeNano()</code> 返回的是runtime的毫秒计数器，不需要系统调用。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runtimeNano returns the current value of the runtime clock in nanoseconds.</span></span><br><span class="line"><span class="comment">//go:linkname runtimeNano runtime.nanotime</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">runtimeNano</span><span class="params">()</span> <span class="title">int64</span></span></span><br><span class="line"><span class="function">// <span class="title">Since</span> <span class="title">returns</span> <span class="title">the</span> <span class="title">time</span> <span class="title">elapsed</span> <span class="title">since</span> <span class="title">t</span>.</span></span><br><span class="line"><span class="function">// <span class="title">It</span> <span class="title">is</span> <span class="title">shorthand</span> <span class="title">for</span> <span class="title">time</span>.<span class="title">Now</span><span class="params">()</span>.<span class="title">Sub</span><span class="params">(t)</span>.</span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">Since</span><span class="params">(t Time)</span> <span class="title">Duration</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> now Time</span><br><span class="line">    <span class="keyword">if</span> t.wall&amp;hasMonotonic != <span class="number">0</span> &#123;</span><br><span class="line">        <span class="comment">// Common case optimization: if t has monotonic time, then Sub will use only it.</span></span><br><span class="line">        now = Time&#123;hasMonotonic, runtimeNano() - startNano, <span class="literal">nil</span>&#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        now = Now()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> now.Sub(t)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以既然有内部计时器，我们可以自己整一个优化的耗时计数。<del>虽说benchmark出来的结果一样</del></p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runtimeNano returns the current value of the runtime clock in nanoseconds.</span></span><br><span class="line"><span class="comment">//go:linkname runtimeNano runtime.nanotime</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">runtimeNano</span><span class="params">()</span> <span class="title">int64</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">UseRuntimeNano</span><span class="params">()</span> <span class="title">int64</span></span> &#123;</span><br><span class="line">    nw := runtimeNano()</span><br><span class="line">    <span class="keyword">return</span> runtimeNano() - nw</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -329,15 +318,13 @@
           
         
         <div class="post-tags">
-            <a href="/tags/programming/" rel="tag"># programming</a>
-          
             <a href="/tags/golang/" rel="tag"># golang</a>
           
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/2020/09/20/frida/" rel="next" title="frida">
-                <i class="fa fa-chevron-left"></i> frida
+              <a href="/2022/07/13/Github-Action学习/" rel="next" title="Github Action学习">
+                <i class="fa fa-chevron-left"></i> Github Action学习
               </a>
             
           </div>
@@ -345,10 +332,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2021/11/22/at-t/" rel="prev" title="at&t">
-                at&t <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
@@ -506,7 +489,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编译相关"><span class="nav-number">1.</span> <span class="nav-text">编译相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#race-detector"><span class="nav-number">1.1.</span> <span class="nav-text">race detector</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#某些技巧"><span class="nav-number">2.</span> <span class="nav-text">某些技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#runtime-LockOSThread"><span class="nav-number">2.1.</span> <span class="nav-text">runtime.LockOSThread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sync-pool"><span class="nav-number">2.2.</span> <span class="nav-text">sync.pool</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#循环内捕获变量"><span class="nav-number">1.</span> <span class="nav-text">循环内捕获变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#make-slice-的两种写法"><span class="nav-number">2.</span> <span class="nav-text">make slice 的两种写法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time-Since-优化"><span class="nav-number">3.</span> <span class="nav-text">time.Since 优化</span></a></li></ol></div>
             
 
           </div>
