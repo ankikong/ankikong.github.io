@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="构建时的相对路径docker build . 并不是指定dockerfile的路径，而是指定了构建时ADD和COPY的上下文路径，然后根据这个路径将文件加入&amp;amp;复制到镜像中 DOCKERFILEFROM FROM是指定的基础镜像，构建时在基础镜像之上操作 必须是第一条指令  RUNRUN是在构建镜时执行一次的shell脚本  一个RUN对应一个UNION FS层，因此，一般RUN多条指令用">
+  <meta name="description" content="rock 5b 到手了">
 <meta name="keywords" content="blog,technology">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker学习笔记">
-<meta property="og:url" content="https://ankikong.github.io/2020/02/02/docker/index.html">
+<meta property="og:title" content="rock5b">
+<meta property="og:url" content="https://ankikong.github.io/2022/10/15/rock5b/index.html">
 <meta property="og:site_name" content="ankikong">
-<meta property="og:description" content="构建时的相对路径docker build . 并不是指定dockerfile的路径，而是指定了构建时ADD和COPY的上下文路径，然后根据这个路径将文件加入&amp;amp;复制到镜像中 DOCKERFILEFROM FROM是指定的基础镜像，构建时在基础镜像之上操作 必须是第一条指令  RUNRUN是在构建镜时执行一次的shell脚本  一个RUN对应一个UNION FS层，因此，一般RUN多条指令用">
+<meta property="og:description" content="rock 5b 到手了">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2022-10-15T09:20:04.996Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="docker学习笔记">
-<meta name="twitter:description" content="构建时的相对路径docker build . 并不是指定dockerfile的路径，而是指定了构建时ADD和COPY的上下文路径，然后根据这个路径将文件加入&amp;amp;复制到镜像中 DOCKERFILEFROM FROM是指定的基础镜像，构建时在基础镜像之上操作 必须是第一条指令  RUNRUN是在构建镜时执行一次的shell脚本  一个RUN对应一个UNION FS层，因此，一般RUN多条指令用">
-  <link rel="canonical" href="https://ankikong.github.io/2020/02/02/docker/">
+<meta name="twitter:title" content="rock5b">
+<meta name="twitter:description" content="rock 5b 到手了">
+  <link rel="canonical" href="https://ankikong.github.io/2022/10/15/rock5b/">
 
 
 <script id="page.configurations">
@@ -78,7 +78,7 @@
   };
 </script>
 
-  <title>docker学习笔记 | ankikong</title>
+  <title>rock5b | ankikong</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129656297-1"></script>
   <script>
@@ -237,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/02/docker/">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2022/10/15/rock5b/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ankikong">
@@ -251,7 +251,7 @@
       <header class="post-header">
 
         
-          <h2 class="post-title" itemprop="name headline">docker学习笔记
+          <h2 class="post-title" itemprop="name headline">rock5b
 
               
             
@@ -271,21 +271,11 @@
                 
               
 
-              <time title="创建时间：2020-02-02 22:07:33" itemprop="dateCreated datePublished" datetime="2020-02-02T22:07:33+08:00">2020-02-02</time>
+              <time title="创建时间：2022-10-15 16:47:15 / 修改时间：17:20:04" itemprop="dateCreated datePublished" datetime="2022-10-15T16:47:15+08:00">2022-10-15</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2022-10-15 17:20:04" itemprop="dateModified" datetime="2022-10-15T17:20:04+08:00">2022-10-15</time>
-              </span>
             
           
 
@@ -300,70 +290,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="构建时的相对路径"><a href="#构建时的相对路径" class="headerlink" title="构建时的相对路径"></a>构建时的相对路径</h2><p><code>docker build .</code> 并不是指定d<code>ockerfile</code>的路径，而是指定了构建时ADD和COPY的上下文路径，然后根据这个路径将文件加入&amp;复制到镜像中</p>
-<h2 id="DOCKERFILE"><a href="#DOCKERFILE" class="headerlink" title="DOCKERFILE"></a>DOCKERFILE</h2><h3 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h3><ul>
-<li>FROM是指定的基础镜像，构建时在基础镜像之上操作</li>
-<li>必须是第一条指令</li>
-</ul>
-<h3 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h3><p>RUN是在构建镜时执行一次的shell脚本</p>
-<ul>
-<li>一个RUN对应一个UNION FS层，因此，一般RUN多条指令用 &amp;&amp; 连接，而不是多个RUN</li>
-</ul>
-<h3 id="COPY"><a href="#COPY" class="headerlink" title="COPY"></a>COPY</h3><ul>
-<li>COPY的目的路径既可以是镜像的绝对路径，也可以是相对路径（相对于<code>WORKDIR</code>）</li>
-<li>COPY会保留文件的各种元数据，包括权限，时间戳等</li>
-<li>可以加上<code>--chown=&lt;user&gt;:&lt;group&gt;</code>修改目标权限 <code>COPY --chown=55:mygroup files* /mydir/</code></li>
-</ul>
-<h3 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h3><ul>
-<li>可以<code>ADD URL</code>，将链接文件下载到指定位置，然后设置权限600</li>
-<li>ADD一个压缩文件，则会自动解压到指定目录</li>
-</ul>
-<h3 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h3><ul>
-<li>容器开启时使用的命令</li>
-<li>由于CMD一结束，docker容器也会一起停止运行，所以CMD执行服务的话，要让任务在前台运行</li>
-</ul>
-<h3 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h3><ul>
-<li>docker run xxx 时，会把后面的参数传递给ENTRYPOINT</li>
-</ul>
-<h3 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a>ENV</h3><ul>
-<li>设置容器运行时环境变量，有两种格式</li>
-<li><code>ENV &lt;key&gt; &lt;value&gt;</code></li>
-<li><code>ENV &lt;key1&gt;=&lt;value1&gt; &lt;key2&gt;=&lt;value2&gt;...</code></li>
-</ul>
-<h3 id="ARG"><a href="#ARG" class="headerlink" title="ARG"></a>ARG</h3><ul>
-<li>设置构建容器时的环境变量</li>
-<li>可以使用<code>--build-arg &lt;参数名&gt;=&lt;值&gt;</code>在执行时加入</li>
-</ul>
-<h3 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a>VOLUME</h3><ul>
-<li>容器写操作执行位置，应避免在容器的存储层写数据</li>
-</ul>
-<h3 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h3><ul>
-<li>声明端口，但运行时不会在宿主进行端口映射</li>
-</ul>
-<h3 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h3><ul>
-<li>指定工作目录</li>
-</ul>
-<h3 id="USER"><a href="#USER" class="headerlink" title="USER"></a>USER</h3><ul>
-<li>指定当前用户，用户必须提前创建</li>
-</ul>
-<h3 id="HEALTHCHECK"><a href="#HEALTHCHECK" class="headerlink" title="HEALTHCHECK"></a>HEALTHCHECK</h3><ul>
-<li>健康检查，告诉docker应该如何判断容器是否正常</li>
-<li><code>HEALTHCHECK</code> 支持下列选项：<ul>
-<li><code>--interval=&lt;间隔&gt;</code>：两次健康检查的间隔，默认为 30 秒；</li>
-<li><code>--timeout=&lt;时长&gt;</code>：健康检查命令运行超时时间，如果超过这个时间，本次健康检查就被视为失败，默认 30 秒；</li>
-<li><code>--retries=&lt;次数&gt;</code>：当连续失败指定次数后，则将容器状态视为 unhealthy，默认 3 次。</li>
-</ul>
-</li>
-</ul>
-<h3 id="ONBUILD"><a href="#ONBUILD" class="headerlink" title="ONBUILD"></a>ONBUILD</h3><ul>
-<li><code>ONBUILD</code> 是一个特殊的指令，它后面跟的是其它指令，比如 <code>RUN</code>, <code>COPY</code> 等，而这些指令，在当前镜像构建时并不会被执行。只有当以当前镜像为基础镜像，去构建下一级镜像的时候才会被执行</li>
-</ul>
-<h2 id="操作容器"><a href="#操作容器" class="headerlink" title="操作容器"></a>操作容器</h2><h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><h4 id="新建并启动"><a href="#新建并启动" class="headerlink" title="新建并启动"></a>新建并启动</h4><ul>
-<li>所需要的命令主要为 docker run</li>
-</ul>
-<h4 id="启动已终止容器"><a href="#启动已终止容器" class="headerlink" title="启动已终止容器"></a>启动已终止容器</h4><ul>
-<li><code>docker container start</code></li>
-</ul>
+        <p>rock 5b 到手了</p>
+<a id="more"></a>
+
+<h2 id="NPU使用"><a href="#NPU使用" class="headerlink" title="NPU使用"></a>NPU使用</h2><p>以下步骤在官方的 ubuntu server 操作</p>
+<ol>
+<li>下载官方的pip whl：<code>git clone https://github.com/rockchip-linux/rknn-toolkit2</code>,并 <code>cd rknn-toolkit2</code></li>
+<li>安装部分依赖：<code>apt install cmake gcc python3.9 python3.9-dev virtualenv</code></li>
+<li>创建一个 virtual env：<code>virtualenv venv --python=python3.9</code>，激活：<code>source venv/bin/activate</code></li>
+<li>安装python依赖：<code>pip3 install numpy opencv-python</code> (这一步，如果不需要运行官方demo，可以不做)</li>
+<li>安装官方的 whl <code>pip3 install rknn_toolkit_lite2/packages/rknn_toolkit_lite2-1.4.0-cp39-cp39-linux_aarch64.whl</code></li>
+<li>官方镜像还缺一个lib：<code>wget https://github.com/rockchip-linux/rknpu2/raw/master/runtime/RK3588/Linux/librknn_api/aarch64/librknnrt.so</code>，<code>cp librknnrt.so /lib</code>, <code>ln -s /lib/librknnrt.so /lib/librknn_api.so</code></li>
+<li>好了，能跑了</li>
+<li>如果你做了第4步，可以用官方demo试一下：<code>cd rknn_toolkit_lite2/examples/inference_with_lite/</code>, <code>python3 test.py</code></li>
+</ol>
 
     </div>
 
@@ -374,8 +314,8 @@
     <footer class="post-footer">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/2020/02/02/POSIX-semaphore/" rel="next" title="POSIX semaphore">
-                <i class="fa fa-chevron-left"></i> POSIX semaphore
+              <a href="/2022/07/24/go笔记/" rel="next" title="golang 笔记">
+                <i class="fa fa-chevron-left"></i> golang 笔记
               </a>
             
           </div>
@@ -383,10 +323,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2020/02/03/learning-bash/" rel="prev" title="learning bash">
-                learning bash <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
@@ -544,7 +480,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#构建时的相对路径"><span class="nav-number">1.</span> <span class="nav-text">构建时的相对路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOCKERFILE"><span class="nav-number">2.</span> <span class="nav-text">DOCKERFILE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FROM"><span class="nav-number">2.1.</span> <span class="nav-text">FROM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RUN"><span class="nav-number">2.2.</span> <span class="nav-text">RUN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#COPY"><span class="nav-number">2.3.</span> <span class="nav-text">COPY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADD"><span class="nav-number">2.4.</span> <span class="nav-text">ADD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMD"><span class="nav-number">2.5.</span> <span class="nav-text">CMD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ENTRYPOINT"><span class="nav-number">2.6.</span> <span class="nav-text">ENTRYPOINT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ENV"><span class="nav-number">2.7.</span> <span class="nav-text">ENV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARG"><span class="nav-number">2.8.</span> <span class="nav-text">ARG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VOLUME"><span class="nav-number">2.9.</span> <span class="nav-text">VOLUME</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EXPOSE"><span class="nav-number">2.10.</span> <span class="nav-text">EXPOSE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WORKDIR"><span class="nav-number">2.11.</span> <span class="nav-text">WORKDIR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#USER"><span class="nav-number">2.12.</span> <span class="nav-text">USER</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HEALTHCHECK"><span class="nav-number">2.13.</span> <span class="nav-text">HEALTHCHECK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ONBUILD"><span class="nav-number">2.14.</span> <span class="nav-text">ONBUILD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作容器"><span class="nav-number">3.</span> <span class="nav-text">操作容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动容器"><span class="nav-number">3.1.</span> <span class="nav-text">启动容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新建并启动"><span class="nav-number">3.1.1.</span> <span class="nav-text">新建并启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动已终止容器"><span class="nav-number">3.1.2.</span> <span class="nav-text">启动已终止容器</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NPU使用"><span class="nav-number">1.</span> <span class="nav-text">NPU使用</span></a></li></ol></div>
             
 
           </div>
