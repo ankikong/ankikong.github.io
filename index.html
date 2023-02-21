@@ -270,7 +270,7 @@
                 
               
 
-              <time title="创建时间：2023-02-21 22:57:52 / 修改时间：23:43:39" itemprop="dateCreated datePublished" datetime="2023-02-21T22:57:52+08:00">2023-02-21</time>
+              <time title="创建时间：2023-02-21 22:57:52 / 修改时间：23:51:10" itemprop="dateCreated datePublished" datetime="2023-02-21T22:57:52+08:00">2023-02-21</time>
             </span>
           
             
@@ -318,8 +318,8 @@
 </li>
 <li>点击最下面的 <code>Save&amp;Apply</code>，终端重连一下wifi应该就有公网ipv6了</li>
 </ol>
-<p>这是 lan 口配置<br><img src="2023-02-21-23-20-43.png" alt><br>这是 wan6 口配置<br><img src="2023-02-21-23-21-21.png" alt><br><img src="2023-02-21-23-21-36.png" alt></p>
-<h2 id="配置防火墙"><a href="#配置防火墙" class="headerlink" title="配置防火墙"></a>配置防火墙</h2><p>ipv6 一般是运营商会分配/48，并且重播后会发生变化，经过路由器dhcp后，终端获取的是 /64，剩下的64位，如果是使用 EUI-64 无状态配置的话，那么后面64位是根据mac地址计算出来的。如下图，我的树莓派后面几位都是相同的，并且结尾的4位和mac地址结尾4位一样。<br><img src="2023-02-21-23-30-59.png" alt><br>因为前缀会变，所以不能配置固定整个ip，需要用掩码。<br>直接进 network -&gt; firewall -&gt; traffic rules，</p>
+<p>这是 lan 口配置<br><img src="../images/2023-02-21-23-20-43.png" alt><br>这是 wan6 口配置<br><img src="../images/2023-02-21-23-21-21.png" alt><br><img src="../images/2023-02-21-23-21-36.png" alt></p>
+<h2 id="配置防火墙"><a href="#配置防火墙" class="headerlink" title="配置防火墙"></a>配置防火墙</h2><p>ipv6 一般是运营商会分配/48，并且重播后会发生变化，经过路由器dhcp后，终端获取的是 /64，剩下的64位，如果是使用 EUI-64 无状态配置的话，那么后面64位是根据mac地址计算出来的。如下图，我的树莓派后面几位都是相同的，并且结尾的4位和mac地址结尾4位一样。<br><img src="../images/2023-02-21-23-30-59.png" alt><br>因为前缀会变，所以不能配置固定整个ip，需要用掩码。<br>直接进 network -&gt; firewall -&gt; traffic rules，</p>
 <ol>
 <li>复制ipv6后面4段字符（假设是 <code>1111:2222:3333:4444:aaaa:bbbb:cccc:dddd</code>，则复制<code>aaaa:bbbb:cccc:dddd</code>）</li>
 <li>Name随便填，Protocol按需</li>
@@ -331,7 +331,7 @@
 <li>action 填 accept，允许请求</li>
 <li>Save 保存就好了</li>
 </ol>
-<p>效果大概这样：<br><img src="2023-02-21-23-33-40.png" alt></p>
+<p>效果大概这样：<br><img src="../images/2023-02-21-23-33-40.png" alt></p>
 <p>整完我的树莓派就能通过ipv6公网，从外网访问了。</p>
 
           
@@ -409,7 +409,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2023-02-21 23:43:39" itemprop="dateModified" datetime="2023-02-21T23:43:39+08:00">2023-02-21</time>
+                <time title="修改时间：2023-02-21 23:51:10" itemprop="dateModified" datetime="2023-02-21T23:51:10+08:00">2023-02-21</time>
               </span>
             
           
@@ -509,7 +509,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2023-02-21 23:43:39" itemprop="dateModified" datetime="2023-02-21T23:43:39+08:00">2023-02-21</time>
+                <time title="修改时间：2023-02-21 23:51:10" itemprop="dateModified" datetime="2023-02-21T23:51:10+08:00">2023-02-21</time>
               </span>
             
           
@@ -609,7 +609,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2023-02-21 23:43:39" itemprop="dateModified" datetime="2023-02-21T23:43:39+08:00">2023-02-21</time>
+                <time title="修改时间：2023-02-21 23:51:10" itemprop="dateModified" datetime="2023-02-21T23:51:10+08:00">2023-02-21</time>
               </span>
             
           
@@ -709,7 +709,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2023-02-21 23:43:39" itemprop="dateModified" datetime="2023-02-21T23:43:39+08:00">2023-02-21</time>
+                <time title="修改时间：2023-02-21 23:51:10" itemprop="dateModified" datetime="2023-02-21T23:51:10+08:00">2023-02-21</time>
               </span>
             
           
@@ -809,7 +809,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2023-02-21 23:43:39" itemprop="dateModified" datetime="2023-02-21T23:43:39+08:00">2023-02-21</time>
+                <time title="修改时间：2023-02-21 23:51:10" itemprop="dateModified" datetime="2023-02-21T23:51:10+08:00">2023-02-21</time>
               </span>
             
           
@@ -909,7 +909,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2023-02-21 23:43:39" itemprop="dateModified" datetime="2023-02-21T23:43:39+08:00">2023-02-21</time>
+                <time title="修改时间：2023-02-21 23:51:10" itemprop="dateModified" datetime="2023-02-21T23:51:10+08:00">2023-02-21</time>
               </span>
             
           
@@ -1009,7 +1009,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2023-02-21 23:43:39" itemprop="dateModified" datetime="2023-02-21T23:43:39+08:00">2023-02-21</time>
+                <time title="修改时间：2023-02-21 23:51:10" itemprop="dateModified" datetime="2023-02-21T23:51:10+08:00">2023-02-21</time>
               </span>
             
           
@@ -1112,7 +1112,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2023-02-21 23:43:39" itemprop="dateModified" datetime="2023-02-21T23:43:39+08:00">2023-02-21</time>
+                <time title="修改时间：2023-02-21 23:51:10" itemprop="dateModified" datetime="2023-02-21T23:51:10+08:00">2023-02-21</time>
               </span>
             
           
@@ -1212,7 +1212,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2023-02-21 23:43:39" itemprop="dateModified" datetime="2023-02-21T23:43:39+08:00">2023-02-21</time>
+                <time title="修改时间：2023-02-21 23:51:10" itemprop="dateModified" datetime="2023-02-21T23:51:10+08:00">2023-02-21</time>
               </span>
             
           
