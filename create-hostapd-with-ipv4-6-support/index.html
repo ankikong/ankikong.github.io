@@ -49,6 +49,7 @@
 
 
 
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;fd9b08448ffd4bf4b246479d7da6f3ca&quot;}'></script>
 
 
 
@@ -275,7 +276,7 @@
 <h2 id="开机自启"><a href="#开机自启" class="headerlink" title="开机自启"></a>开机自启</h2><p>按照上面的方法，你已经可以上ipv4和ipv6了，但是每次重启都要执行命令。<br>修改<code>/etc/rc.local</code></p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -APOSTROUTING -o eth0 -j MASQUERADE</span><br><span class="line">iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT</span><br><span class="line">ip6tables -t nat -A POSTROUTING -s fd00:fd:fd:fd::/64 -o eth0 -j MASQUERADE</span><br></pre></td></tr></table></figure>
 
-<p>完事，有问题请<a href="mailto:&#97;&#x6e;&#x6b;&#x69;&#x6b;&#x6f;&#110;&#x67;&#64;&#113;&#113;&#46;&#99;&#111;&#x6d;">Email</a>，或是来<a target="_blank" rel="noopener" href="https://github.com/AnkiKong/ankikong.github.io">这里</a>发issue</p>
+<p>完事，有问题请<a href="mailto:&#x61;&#110;&#107;&#x69;&#x6b;&#111;&#x6e;&#103;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;">Email</a>，或是来<a target="_blank" rel="noopener" href="https://github.com/AnkiKong/ankikong.github.io">这里</a>发issue</p>
 
     </div>
 
