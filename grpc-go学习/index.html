@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ankikong.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.2","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="学学 grpc-go，顺便整整优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="grpc-go学习">
+<meta property="og:url" content="https://ankikong.github.io/grpc-go%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="ankikong">
+<meta property="og:description" content="学学 grpc-go，顺便整整优化">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-10T13:40:06.000Z">
+<meta property="article:modified_time" content="2022-07-12T15:13:41.345Z">
+<meta property="article:author" content="ankikong">
+<meta property="article:tag" content="grpc">
+<meta property="article:tag" content="go">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ankikong.github.io/grpc-go%E5%AD%A6%E4%B9%A0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ankikong.github.io/grpc-go%E5%AD%A6%E4%B9%A0/","path":"grpc-go学习/","title":"grpc-go学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>grpc-go学习 | ankikong</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ankikong</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%BA%94%E7%AD%94%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">简单应答服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E5%BC%8F%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.</span> <span class="nav-text">流式服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E5%90%88nginx"><span class="nav-number">3.</span> <span class="nav-text">配合nginx</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ankikong</p>
+  <div class="site-description" itemprop="description">ankikong's blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/grpc-go%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="grpc-go学习 | ankikong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          grpc-go学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-10 21:40:06" itemprop="dateCreated datePublished" datetime="2022-07-10T21:40:06+08:00">2022-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-12 23:13:41" itemprop="dateModified" datetime="2022-07-12T23:13:41+08:00">2022-07-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>学学 grpc-go，顺便整整优化</p>
+<span id="more"></span>
+
+<h2 id="简单应答服务"><a href="#简单应答服务" class="headerlink" title="简单应答服务"></a>简单应答服务</h2><p>安装idl转换工具</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go install google.golang.org/protobuf/cmd/protoc-gen-go</span><br><span class="line">go install google.golang.org/grpc/cmd/protoc-gen-go-grpc</span><br></pre></td></tr></table></figure>
+
+<p>然后写一份proto</p>
+<figure class="highlight proto"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意要是 proto3 ，只有3才支持 service 语法</span></span><br><span class="line">syntax = <span class="string">&quot;proto3&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里的go_package是指定生成go代码时，第一行的package名。这里可以用你项目的mod路径+生成后代码所在的相对路径</span></span><br><span class="line"><span class="keyword">option</span> go_package = <span class="string">&quot;grpcserver/repo&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">message </span><span class="title class_">Request</span> &#123;</span><br><span class="line">    <span class="type">string</span> msg = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">message </span><span class="title class_">Response</span> &#123;</span><br><span class="line">    <span class="type">string</span> msg = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">service </span><span class="title class_">Greeter</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">rpc</span> Echo(Request) <span class="keyword">returns</span> (Response) </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写完进入代码路径，执行</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc.exe --go_out=. --go_opt=paths=source_relative  --go-grpc_out=. --go-grpc_opt=paths=source_relative .\server.proto</span><br></pre></td></tr></table></figure>
+
+<p>就可以生成 <code>*.pb.go</code> 和 <code>*_grpc.pb.go</code> 两个源码文件，接下来实现相关方法。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;context&quot;</span></span><br><span class="line">    <span class="string">&quot;grpcserver/repo&quot;</span> <span class="comment">// 导入包时，包名和proto文件里面的package一样</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> GreeterImpl <span class="keyword">struct</span> &#123;</span><br><span class="line">    repo.UnimplementedGreeterServer</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(*GreeterImpl)</span></span> Echo(ctx context.Context, in *repo.Request) (*repo.Response, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;repo.Response&#123;Msg: in.Msg&#125;, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现加入的 <code>repo.UnimplementedGreeterServer</code> ，是grpc-go后面版本新增加的，默认实现了所有接口的对象。默认方法是返回一个错误，显示接口未实现，保证主调方用新pb调用服务端旧协议时，出现奇怪的错误。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GreeterServer is the server API for Greeter service.</span></span><br><span class="line"><span class="comment">// All implementations must embed UnimplementedGreeterServer</span></span><br><span class="line"><span class="comment">// for forward compatibility</span></span><br><span class="line"><span class="keyword">type</span> GreeterServer <span class="keyword">interface</span> &#123;</span><br><span class="line">    Echo(context.Context, *Request) (*Response, <span class="type">error</span>)</span><br><span class="line">    mustEmbedUnimplementedGreeterServer() <span class="comment">// 这是个匿名函数，所以自己的实现必须导入 UnimplementedGreeterServer 才能编译通过</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// UnimplementedGreeterServer must be embedded to have forward compatible implementations.</span></span><br><span class="line"><span class="keyword">type</span> UnimplementedGreeterServer <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里默认实现了一个 Echo，返回方法未实现的错误。在我们自己实现的代码中，Echo会覆盖这一个</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(UnimplementedGreeterServer)</span></span> Echo(context.Context, *Request) (*Response, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>, status.Errorf(codes.Unimplemented, <span class="string">&quot;method Echo not implemented&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(UnimplementedGreeterServer)</span></span> mustEmbedUnimplementedGreeterServer() &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来就是监听并服务了。grpc有两种监听方式，一种是直接listen一个tcp socket，另外一种是通过 <code>ServeHTTP</code> ，和http server 一起工作。下面是直接listen tcp的实现</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;grpcserver/repo&quot;</span></span><br><span class="line">    <span class="string">&quot;grpcserver/service&quot;</span></span><br><span class="line">    <span class="string">&quot;net&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;google.golang.org/grpc&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    sock, err := net.Listen(<span class="string">&quot;tcp&quot;</span>, <span class="string">&quot;127.0.0.1:9999&quot;</span>) <span class="comment">// 监听端口</span></span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">    server := grpc.NewServer()</span><br><span class="line">    repo.RegisterGreeterServer(server, &amp;service.GreeterImpl&#123;&#125;)</span><br><span class="line">    <span class="keyword">if</span> err := server.Serve(sock); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;context&quot;</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;grpcserver/repo&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;google.golang.org/grpc&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    conn, err := grpc.Dial(<span class="string">&quot;127.0.0.1:9999&quot;</span>, grpc.WithInsecure())</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> conn.Close()</span><br><span class="line">    client := repo.NewGreeterClient(conn)</span><br><span class="line">    resp, err := client.Echo(context.Background(), &amp;repo.Request&#123;</span><br><span class="line">        Msg: <span class="string">&quot;hello&quot;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(resp)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到这里，一个简单的 Echo 服务就搭好了。</p>
+<p>这里不难看出，每次都是Dial一个新的链接，然后发起请求，并没有复用链接，所以其实有优化空间。</p>
+<h2 id="流式服务"><a href="#流式服务" class="headerlink" title="流式服务"></a>流式服务</h2><p>在pb的 request 和 response 前面加个 stream ，就是流接口定义</p>
+<figure class="highlight proto"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">service </span><span class="title class_">Greeter</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">rpc</span> Echo(Request) <span class="keyword">returns</span> (Response) </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">rpc</span> StreamEcho(stream Request) <span class="keyword">returns</span> (stream Response) </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>服务端新增个接口实现</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(*GreeterImpl)</span></span> StreamEcho(s repo.Greeter_StreamEchoServer) <span class="type">error</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">    wg.Add(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">            time.Sleep(time.Second)</span><br><span class="line">            s.Send(&amp;repo.Response&#123;</span><br><span class="line">                Msg: fmt.Sprintf(<span class="string">&quot;hello %d&quot;</span>, i),</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        wg.Done()</span><br><span class="line">    &#125;()</span><br><span class="line">    wg.Wait()</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>client 写个循环 recv</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">c, err := client.StreamEcho(context.Background())</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">    msg, err := c.Recv()</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(msg)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配合nginx"><a href="#配合nginx" class="headerlink" title="配合nginx"></a>配合nginx</h2><p>一般会用nginx或其他工具作为中间层，tls加密放在中间层，所以grpc服务这边可以使用非加密的h2c提供服务</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    s := grpc.NewServer()</span><br><span class="line">    repo.RegisterGreeterServer(s, &amp;service.GreeterImpl&#123;&#125;)</span><br><span class="line">    <span class="comment">// 先申请一个 handler ,方法指向serverHTTP</span></span><br><span class="line">    handlerFunc := http.HandlerFunc(s.ServeHTTP)</span><br><span class="line">    <span class="comment">// 然后用h2c获取handler，这样就可以提供一个没有加密的grpc服务了</span></span><br><span class="line">    handler := h2c.NewHandler(handlerFunc, &amp;http2.Server&#123;&#125;)</span><br><span class="line">    http.ListenAndServe(<span class="string">&quot;127.0.0.1:9999&quot;</span>, handler)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/grpc/" rel="tag"># grpc</a>
+              <a href="/tags/go/" rel="tag"># go</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/ubuntu-bbr/" rel="prev" title="ubuntu 开启 bbr">
+                  <i class="fa fa-angle-left"></i> ubuntu 开启 bbr
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E4%BD%BF%E7%94%A8github-action%E9%83%A8%E7%BD%B2hexo/" rel="next" title="使用github action部署hexo">
+                  使用github action部署hexo <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ankikong</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

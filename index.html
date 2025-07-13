@@ -1,284 +1,203 @@
 <!DOCTYPE html>
-
-
-
-
-
-<html class="theme-next gemini use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="generator" content="Hexo 3.9.0">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
-  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
 
-<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Gemini',
-    version: '7.3.0',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    search: {
-      root: '/',
-      path: ''
-    },
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    translation: {
-      copy_button: '复制',
-      copy_success: '复制成功',
-      copy_failure: '复制失败'
-    }
-  };
-</script>
 
-  <meta name="description" content="ankikong&apos;s blog">
-<meta name="keywords" content="blog,technology">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ankikong.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.2","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="ankikong&#39;s blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ankikong">
 <meta property="og:url" content="https://ankikong.github.io/index.html">
 <meta property="og:site_name" content="ankikong">
-<meta property="og:description" content="ankikong&apos;s blog">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:description" content="ankikong&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ankikong">
+<meta property="article:tag" content="blog,technology">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ankikong">
-<meta name="twitter:description" content="ankikong&apos;s blog">
-  <link rel="canonical" href="https://ankikong.github.io/">
 
 
-<script id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
+<link rel="canonical" href="https://ankikong.github.io/">
 
-  <title>ankikong</title>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ankikong</title>
   
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129656297-1"></script>
-  <script>
-    var host = window.location.hostname;
-    if (host !== "localhost" || !true) {
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-129656297-1');
-    }
-  </script>
 
 
 
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
 
 
 
 
 
   <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
-
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-  <div class="container sidebar-position-left page-home">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">ankikong</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
     </div>
   </div>
 
-  <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">ankikong</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
   </div>
 </div>
 
 
 
-<nav class="site-nav">
-    <ul id="menu" class="menu">
-        
-        
-        
-          
-          <li class="menu-item menu-item-home menu-item-active">
-      
-    
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-about">
-      
-    
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
-  </li>
+</header>
         
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-      
-    
+  
+  <aside class="sidebar">
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-      
-    
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-      
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
-
-  </li>
-    </ul>
-</nav>
-
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ankikong</p>
+  <div class="site-description" itemprop="description">ankikong's blog</div>
 </div>
-    </header>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
 
     
 
 
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-            
+<div class="post-block">
+  
+  
 
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2022/07/10/grpc-go学习/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/openwrt-dhcpv6-relay/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ankikong">
-      <meta itemprop="description" content="ankikong's blog">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | ankikong">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/openwrt-dhcpv6-relay/" class="post-title-link" itemprop="url">Openwrt 开启 ipv6 中继</a>
+        </h2>
 
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2022/07/10/grpc-go学习/" class="post-title-link" itemprop="url">grpc-go学习</a>
-              
-            
-          </h2>
-        
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
+      <time title="创建时间：2023-02-21 22:57:52 / 修改时间：23:56:52" itemprop="dateCreated datePublished" datetime="2023-02-21T22:57:52+08:00">2023-02-21</time>
+    </span>
 
-              
-                
-              
-
-              <time title="创建时间：2022-07-10 21:40:06 / 修改时间：22:26:49" itemprop="dateCreated datePublished" datetime="2022-07-10T21:40:06+08:00">2022-07-10</time>
-            </span>
-          
-            
-
-            
-          
-
-          <br>
+  
+</div>
 
         </div>
       </header>
@@ -287,17 +206,125 @@
     
     
     <div class="post-body" itemprop="articleBody">
+          <span id="more"></span>
+
+<h2 id="配置ipv6"><a href="#配置ipv6" class="headerlink" title="配置ipv6"></a>配置ipv6</h2><p>进入 <code>network</code> -&gt; <code>interface</code></p>
+<ol>
+<li><code>wan6</code> -&gt; <code>edit</code> -&gt; <code>dhcp server</code><ul>
+<li><code>general setup</code>：<ul>
+<li><code>Ignore interface</code>：打勾</li>
+</ul>
+</li>
+<li><code>ipv6 settings</code>：<ul>
+<li><code>Designated master</code>：打勾</li>
+<li><code>RA-Service</code>、<code>DHCPv6-Service</code>、<code>NDP-Proxy</code>全部设置为<code>relay mode</code></li>
+<li><code>Learn routes</code>：打勾</li>
+<li>Save 保存</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>lan</code> -&gt; <code>edit</code> -&gt; <code>dhcp server</code> -&gt; <code>ipv6 settings</code><ul>
+<li><code>RA-Service</code>：<code>relay mode</code></li>
+<li><code>DHCPv6-Service</code>：<code>hybrid</code></li>
+<li><code>NDP-Proxy</code>：<code>relay mode</code></li>
+<li><code>Local IPv6 DNS server</code>：打勾</li>
+<li><code>Learn routes</code>：打勾</li>
+</ul>
+</li>
+<li>点击最下面的 <code>Save&amp;Apply</code>，终端重连一下wifi应该就有公网ipv6了</li>
+</ol>
+<p>这是 lan 口配置<br><img src="/../images/2023-02-21-23-20-43.png"><br>这是 wan6 口配置<br><img src="/../images/2023-02-21-23-21-21.png"><br><img src="/../images/2023-02-21-23-21-36.png"></p>
+<h2 id="配置防火墙"><a href="#配置防火墙" class="headerlink" title="配置防火墙"></a>配置防火墙</h2><p>ipv6 一般是运营商会分配&#x2F;48，并且重播后会发生变化，经过路由器dhcp后，终端获取的是 &#x2F;64，剩下的64位，如果是使用 EUI-64 无状态配置的话，那么后面64位是根据mac地址计算出来的。如下图，我的树莓派后面几位都是相同的，并且结尾的4位和mac地址结尾4位一样。<br><img src="/../images/2023-02-21-23-30-59.png"><br>因为前缀会变，所以不能配置固定整个ip，需要用掩码。<br>直接进 network -&gt; firewall -&gt; traffic rules，</p>
+<ol>
+<li>复制ipv6后面4段字符（假设是 <code>1111:2222:3333:4444:aaaa:bbbb:cccc:dddd</code>，则复制<code>aaaa:bbbb:cccc:dddd</code>）</li>
+<li>Name随便填，Protocol按需</li>
+<li>因为是要放行公网请求，Source zone 选 wan6</li>
+<li>source address&amp;port是限制来源ip，可以不管，不填默认全部放行</li>
+<li>destination zone 选 lan</li>
+<li>destination address 填 <code>::&#123;你复制的结尾&#125;/::ffff:ffff:ffff:ffff</code>（按1中假设，结果就是 <code>::aaaa:bbbb:cccc:dddd/::ffff:ffff:ffff:ffff</code>）</li>
+<li>destination port 就是需要放行的端口了，按需填，不填默认全部放行</li>
+<li>action 填 accept，允许请求</li>
+<li>Save 保存就好了</li>
+</ol>
+<p>效果大概这样：<br><img src="/../images/2023-02-21-23-33-40.png"></p>
+<p>整完我的树莓派就能通过ipv6公网，从外网访问了。</p>
 
       
-          <p>学学 grpc-go，顺便整整优化</p>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/rock5b-ax210/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | ankikong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/rock5b-ax210/" class="post-title-link" itemprop="url">rock5b ax210</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-01-29 22:38:25 / 修改时间：22:50:52" itemprop="dateCreated datePublished" datetime="2023-01-29T22:38:25+08:00">2023-01-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最新的armbian终于可以正常使用ax210了</p>
           <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2022/07/10/grpc-go学习/#more" rel="contents">
+            <div class="post-button">
+              <a class="btn" href="/rock5b-ax210/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -309,66 +336,57 @@
 
     <footer class="post-footer">
         <div class="post-eof"></div>
+      
     </footer>
-  </div>
-  
-  
-  
   </article>
+</div>
+
+
+
 
     
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+<div class="post-block">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2022/07/09/ubuntu-bbr/">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/rock5b/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ankikong">
-      <meta itemprop="description" content="ankikong's blog">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | ankikong">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/rock5b/" class="post-title-link" itemprop="url">rock5b</a>
+        </h2>
 
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2022/07/09/ubuntu-bbr/" class="post-title-link" itemprop="url">ubuntu 开启 bbr</a>
-              
-            
-          </h2>
-        
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
+      <time title="创建时间：2022-10-15 16:47:15 / 修改时间：17:13:21" itemprop="dateCreated datePublished" datetime="2022-10-15T16:47:15+08:00">2022-10-15</time>
+    </span>
 
-              
-                
-              
-
-              <time title="创建时间：2022-07-09 13:52:44 / 修改时间：13:58:57" itemprop="dateCreated datePublished" datetime="2022-07-09T13:52:44+08:00">2022-07-09</time>
-            </span>
-          
-            
-
-            
-          
-
-          <br>
+  
+</div>
 
         </div>
       </header>
@@ -377,22 +395,419 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
+          <p>rock 5b 到手了</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/rock5b/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
-          
-            <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ol>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/go%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | ankikong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/go%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">golang 笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-24 11:35:42" itemprop="dateCreated datePublished" datetime="2022-07-24T11:35:42+08:00">2022-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-10-15 16:47:32" itemprop="dateModified" datetime="2022-10-15T16:47:32+08:00">2022-10-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>总结自己遇过的各种问题</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/go%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/Github-Action%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | ankikong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Github-Action%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">Github Action学习</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-07-13 23:33:35 / 修改时间：23:50:42" itemprop="dateCreated datePublished" datetime="2022-07-13T23:33:35+08:00">2022-07-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>公司的CI就是抄Github Action语法的，学一下不亏。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Github-Action%E5%AD%A6%E4%B9%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/%E4%BD%BF%E7%94%A8github-action%E9%83%A8%E7%BD%B2hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | ankikong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/%E4%BD%BF%E7%94%A8github-action%E9%83%A8%E7%BD%B2hexo/" class="post-title-link" itemprop="url">使用github action部署hexo</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-11 23:12:37" itemprop="dateCreated datePublished" datetime="2022-07-11T23:12:37+08:00">2022-07-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-13 23:51:10" itemprop="dateModified" datetime="2022-07-13T23:51:10+08:00">2022-07-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>好耶，不用自己配置环境了</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/%E4%BD%BF%E7%94%A8github-action%E9%83%A8%E7%BD%B2hexo/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/grpc-go%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | ankikong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/grpc-go%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">grpc-go学习</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-10 21:40:06" itemprop="dateCreated datePublished" datetime="2022-07-10T21:40:06+08:00">2022-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-12 23:13:41" itemprop="dateModified" datetime="2022-07-12T23:13:41+08:00">2022-07-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>学学 grpc-go，顺便整整优化</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/grpc-go%E5%AD%A6%E4%B9%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/ubuntu-bbr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | ankikong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ubuntu-bbr/" class="post-title-link" itemprop="url">ubuntu 开启 bbr</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-07-09 13:52:44 / 修改时间：13:58:57" itemprop="dateCreated datePublished" datetime="2022-07-09T13:52:44+08:00">2022-07-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ol>
 <li><p>往 <code>/etc/sysctl.conf</code> 追加下面文本</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net.core.default_qdisc=fq</span><br><span class="line">net.ipv4.tcp_congestion_control=bbr</span><br></pre></td></tr></table></figure>
+ <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net.core.default_qdisc=fq</span><br><span class="line">net.ipv4.tcp_congestion_control=bbr</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>执行 <code>sysctl -p</code> 保存配置</p>
 </li>
 </ol>
 <h2 id="查看是否生效"><a href="#查看是否生效" class="headerlink" title="查看是否生效"></a>查看是否生效</h2><p>执行 <code>sysctl net.ipv4.tcp_available_congestion_control</code>, 如果结果像下面那样，有bbr字样，就开启了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_available_congestion_control = reno cubic bbr</span><br></pre></td></tr></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_available_congestion_control = reno cubic bbr</span><br></pre></td></tr></table></figure>
 
-
-          
-        
       
     </div>
 
@@ -402,66 +817,57 @@
 
     <footer class="post-footer">
         <div class="post-eof"></div>
+      
     </footer>
-  </div>
-  
-  
-  
   </article>
+</div>
+
+
+
 
     
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+<div class="post-block">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2022/06/05/cloudflare-argo-tunnel-and-warp/">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/cloudflare-argo-tunnel-and-warp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ankikong">
-      <meta itemprop="description" content="ankikong's blog">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | ankikong">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/cloudflare-argo-tunnel-and-warp/" class="post-title-link" itemprop="url">cloudflare argo tunnel and warp</a>
+        </h2>
 
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2022/06/05/cloudflare-argo-tunnel-and-warp/" class="post-title-link" itemprop="url">cloudflare argo tunnel and warp</a>
-              
-            
-          </h2>
-        
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
+      <time title="创建时间：2022-06-05 21:29:19 / 修改时间：21:57:23" itemprop="dateCreated datePublished" datetime="2022-06-05T21:29:19+08:00">2022-06-05</time>
+    </span>
 
-              
-                
-              
-
-              <time title="创建时间：2022-06-05 21:29:19 / 修改时间：21:57:23" itemprop="dateCreated datePublished" datetime="2022-06-05T21:29:19+08:00">2022-06-05</time>
-            </span>
-          
-            
-
-            
-          
-
-          <br>
+  
+</div>
 
         </div>
       </header>
@@ -470,17 +876,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>周末把树莓派3b刷成了ubuntu server 18，顺便使用cf提供的平台搭建一个简易网站。</p>
           <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2022/06/05/cloudflare-argo-tunnel-and-warp/#more" rel="contents">
+            <div class="post-button">
+              <a class="btn" href="/cloudflare-argo-tunnel-and-warp/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
-          
           <!--/noindex-->
         
       
@@ -492,76 +894,63 @@
 
     <footer class="post-footer">
         <div class="post-eof"></div>
+      
     </footer>
-  </div>
-  
-  
-  
   </article>
+</div>
+
+
+
 
     
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+
+<div class="post-block">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2021/11/22/at-t/">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/at-t/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ankikong">
-      <meta itemprop="description" content="ankikong's blog">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | ankikong">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/at-t/" class="post-title-link" itemprop="url">at&t</a>
+        </h2>
 
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/11/22/at-t/" class="post-title-link" itemprop="url">at&t</a>
-              
-            
-          </h2>
-        
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
+      <time title="创建时间：2021-11-22 22:47:07" itemprop="dateCreated datePublished" datetime="2021-11-22T22:47:07+08:00">2021-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-02-21 23:57:42" itemprop="dateModified" datetime="2023-02-21T23:57:42+08:00">2023-02-21</time>
+    </span>
 
-              
-                
-              
-
-              <time title="创建时间：2021-11-22 22:47:07" itemprop="dateCreated datePublished" datetime="2021-11-22T22:47:07+08:00">2021-11-22</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2022-02-08 20:44:47" itemprop="dateModified" datetime="2022-02-08T20:44:47+08:00">2022-02-08</time>
-              </span>
-            
-          
-
-          <br>
+  
+</div>
 
         </div>
       </header>
@@ -570,17 +959,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <a id="more"></a>
+          <span id="more"></span>
 
 <h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><p>ESP 栈指针寄存器<br>EBP 指向当前方法的栈底部指针<br>EAX 可用于返回值</p>
-<h2 id="常见指令"><a href="#常见指令" class="headerlink" title="常见指令"></a>常见指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movl %esp, %eax // 把esp的值复制到eax</span><br><span class="line">leal 4(%esp), %eax // 把[eax+4]的值所在地址放到eax中</span><br></pre></td></tr></table></figure>
+<h2 id="常见指令"><a href="#常见指令" class="headerlink" title="常见指令"></a>常见指令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movl %esp, %eax // 把esp的值复制到eax</span><br><span class="line">leal 4(%esp), %eax // 把[eax+4]的值所在地址放到eax中</span><br></pre></td></tr></table></figure>
 
-
-          
-        
       
     </div>
 
@@ -590,892 +973,53 @@
 
     <footer class="post-footer">
         <div class="post-eof"></div>
+      
     </footer>
-  </div>
-  
-  
-  
   </article>
+</div>
 
-    
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2021/10/06/golang-note/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ankikong">
-      <meta itemprop="description" content="ankikong's blog">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ankikong">
-    </span>
-      <header class="post-header">
-
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/10/06/golang-note/" class="post-title-link" itemprop="url">golang note</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2021-10-06 17:25:10 / 修改时间：19:00:37" itemprop="dateCreated datePublished" datetime="2021-10-06T17:25:10+08:00">2021-10-06</time>
-            </span>
-          
-            
-
-            
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>个人笔记</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2021/10/06/golang-note/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2021/01/26/gdb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ankikong">
-      <meta itemprop="description" content="ankikong's blog">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ankikong">
-    </span>
-      <header class="post-header">
-
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/01/26/gdb/" class="post-title-link" itemprop="url">未命名</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2021-01-26 10:36:51 / 修改时间：11:00:13" itemprop="dateCreated datePublished" datetime="2021-01-26T10:36:51+08:00">2021-01-26</time>
-            </span>
-          
-            
-
-            
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <h1 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gdbserver :6000 --attach pid</span><br><span class="line">arm-linux-androideabi-gdb  ~/app_process -tui</span><br><span class="line"><span class="meta">#</span><span class="bash"> arm-linux-androideabi-gdb是ANDROID_NDK下</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用 -tui 参数可以显示当前执行的代码</span></span><br><span class="line">target remote :6000</span><br><span class="line">dump memory /tmp/sshd.dump 0x7f25c2a4e000 0x7f25c2e61000</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/09/20/frida/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ankikong">
-      <meta itemprop="description" content="ankikong's blog">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ankikong">
-    </span>
-      <header class="post-header">
-
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/09/20/frida/" class="post-title-link" itemprop="url">frida</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-09-20 13:20:19 / 修改时间：16:56:48" itemprop="dateCreated datePublished" datetime="2020-09-20T13:20:19+08:00">2020-09-20</time>
-            </span>
-          
-            
-
-            
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <h2 id="windows安装"><a href="#windows安装" class="headerlink" title="windows安装"></a>windows安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install frida frida-tools</span><br></pre></td></tr></table></figure>
-
-<p>不过<code>frida</code>安装时总会卡住不动,可以到<a href="https://pypi.org/project/frida/#files" target="_blank" rel="noopener">这里</a> 选择和你的python版本一致的,注意指令集也要和python的一样.然后直接<code>easy_install xxx.egg</code></p>
-<h2 id="Android安装"><a href="#Android安装" class="headerlink" title="Android安装"></a>Android安装</h2><p>到<a href="https://github.com/frida/frida/releases" target="_blank" rel="noopener">这里</a>下载server,主要要和手机的指令集一致的,解压后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb push server 手机路径</span><br><span class="line">adb shell chmod +x server</span><br><span class="line">forward tcp:27042 tcp:27042</span><br><span class="line">forward tcp:27043 tcp:27043</span><br><span class="line">adb shell ./server</span><br></pre></td></tr></table></figure>
-
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>python脚本：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">js = open(<span class="string">"code/frida/a.js"</span>, encoding=<span class="string">"utf8"</span>).read()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_message</span><span class="params">(message, data)</span>:</span></span><br><span class="line">    print(data)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> [<span class="string">"stack"</span>, <span class="string">"description"</span>]:</span><br><span class="line">        msg = message.get(k)</span><br><span class="line">        <span class="keyword">if</span> msg <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            print(msg)</span><br><span class="line"></span><br><span class="line">session = frida.get_remote_device().attach(<span class="string">'com.picacomic.fregata'</span>)</span><br><span class="line">script = session.create_script(js)</span><br><span class="line">script.on(<span class="string">'message'</span>, on_message)</span><br><span class="line">script.load()</span><br><span class="line"></span><br><span class="line">sys.stdin.read()</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><p>获取非native方法的输入值和返回值,这里的方法为 <code>String c([]String)</code></p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Java.available) &#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> MyApplication = Java.use(<span class="string">'com.picacomic.fregata.MyApplication'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(MyApplication);</span><br><span class="line">        MyApplication.c.implementation = <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"param:"</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(v);</span><br><span class="line">            <span class="keyword">var</span> ret = <span class="keyword">this</span>.c(v);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"return value:"</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(ret);</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"load java failed"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>获取native方法的输入值和返回值,这里的方法是 <code>String getStringSigFromNative();</code></p>
-</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Java.available) &#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        Interceptor.attach(Module.findExportByName(<span class="string">"libJniTest.so"</span>, <span class="string">"Java_com_picacomic_fregata_MyApplication_getStringSigFromNative"</span>), &#123;</span><br><span class="line">            <span class="comment">// onEnter 是方法开始前调用的,args[0]是env,args[1]是jclass,args[2...]就是方法的输入值了</span></span><br><span class="line">            onEnter: <span class="function"><span class="keyword">function</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">                send(args[<span class="number">0</span>]);</span><br><span class="line">                send(args[<span class="number">1</span>]);</span><br><span class="line">            &#125;,</span><br><span class="line">            onLeave: <span class="function"><span class="keyword">function</span>(<span class="params">ret</span>) </span>&#123;</span><br><span class="line">                send(<span class="string">"ret:"</span> + Java.vm.getEnv().getStringUtfChars(ret, <span class="literal">null</span>).readCString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"load java failed"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里的<code>Java_com_picacomic_fregata_MyApplication_getStringSigFromNative</code>是查so文件得到的方法名,非java源码里面的名称.可以把 .so抠出来,丢到linux里面,然后 <code>nm -D libJniTest.so</code>,输出大概长这样<br><img src="../images/native1.png" alt="native1"></p>
-<h2 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h2><p>打印String VAL 需要用 <code>Java.vm.getEnv().getStringUtfChars(VAL, null).readCString()</code>,不然打出来是个地址</p>
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/04/07/mysql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ankikong">
-      <meta itemprop="description" content="ankikong's blog">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ankikong">
-    </span>
-      <header class="post-header">
-
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/04/07/mysql/" class="post-title-link" itemprop="url">mysql</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-04-07 20:49:49" itemprop="dateCreated datePublished" datetime="2020-04-07T20:49:49+08:00">2020-04-07</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2022-02-08 22:31:09" itemprop="dateModified" datetime="2022-02-08T22:31:09+08:00">2022-02-08</time>
-              </span>
-            
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>mysql 学习日记</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2020/04/07/mysql/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/03/20/redis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ankikong">
-      <meta itemprop="description" content="ankikong's blog">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ankikong">
-    </span>
-      <header class="post-header">
-
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/03/20/redis/" class="post-title-link" itemprop="url">redis</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-20 21:56:39 / 修改时间：22:51:23" itemprop="dateCreated datePublished" datetime="2020-03-20T21:56:39+08:00">2020-03-20</time>
-            </span>
-          
-            
-
-            
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <h2 id="简单动态字符串-SDS"><a href="#简单动态字符串-SDS" class="headerlink" title="简单动态字符串(SDS)"></a>简单动态字符串(SDS)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">attribute__</span> ((__<span class="title">packed__</span>)) <span class="title">sdshdr8</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint8_t</span> len; <span class="comment">// 字符串长度</span></span><br><span class="line">    <span class="keyword">uint8_t</span> alloc; <span class="comment">// 不包括头部长度和结束符长度</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> flags; <span class="comment">/* 3 lsb of type, 5 unused bits */</span></span><br><span class="line">    <span class="keyword">char</span> buf[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>不包括头的意思是:redis在新建完sds,并不会直接返回这个结构体,而是返回buf的地址,这样就可以直接使用<code>string.h</code>里面的方法进行处理,所以下面:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SDS_HDR(T,s) ((struct sdshdr##T *)((s)-(sizeof(struct sdshdr##T))))</span></span><br></pre></td></tr></table></figure>
-
-<p>这个就是输入T(是sdshdrT),s就是字符串的首地址,这样处理就可以通过字符串的首地址获得整个结构体</p>
-<h2 id="ziplist"><a href="#ziplist" class="headerlink" title="ziplist"></a>ziplist</h2><p>结构为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+-------+----------------------------</span><br><span class="line">|4 byte |4 byte |2 byte |</span><br><span class="line">+-------+</span><br><span class="line">|zlbytes|zltail |entries|</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/2020/02/25/Rust-learning-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ankikong">
-      <meta itemprop="description" content="ankikong's blog">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ankikong">
-    </span>
-      <header class="post-header">
-
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/02/25/Rust-learning-note/" class="post-title-link" itemprop="url">Rust learning note</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-25 23:47:50" itemprop="dateCreated datePublished" datetime="2020-02-25T23:47:50+08:00">2020-02-25</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-02-27 21:32:56" itemprop="dateModified" datetime="2020-02-27T21:32:56+08:00">2020-02-27</time>
-              </span>
-            
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <h2 id="Option-lt-T-gt"><a href="#Option-lt-T-gt" class="headerlink" title="Option&lt;T&gt;"></a>Option&lt;T&gt;</h2><p>像C#的nullable，就是使没有支持null(None)的数据类型增加null(None)这个取值,要用Some(x)进行解包</p>
-<h2 id="变量所有权"><a href="#变量所有权" class="headerlink" title="变量所有权"></a>变量所有权</h2><p>一个变量只能拥有一个可写的引用,但是可以拥有多个只读引用,读与写引用互斥.</p>
-<p>栈上变量直接赋值,会直接复制,不会转移所有权.但是堆上变量赋值如果没有使用clone(),则会转移所有权,转移后原来变量名失去所有权,使用的话会在编译阶段报错</p>
-<p>函数如果没有传引用的话,会把所有权转移到被调用函数中</p>
-<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 表示a,b和返回值有相同的生命周期</span></span><br><span class="line"><span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">t3</span></span>&lt;<span class="symbol">'a</span>, T&gt; (a:&amp;<span class="symbol">'a</span> T, b:&amp;<span class="symbol">'a</span> T) -&gt; &amp;<span class="symbol">'a</span> T</span><br><span class="line">    <span class="keyword">where</span> T: cmp::<span class="built_in">PartialOrd</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> a &gt; b &#123;</span><br><span class="line">        a</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        b</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>静态生命周期</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s: &amp;<span class="symbol">'static</span> <span class="built_in">str</span> = <span class="string">"455"</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="trait"><a href="#trait" class="headerlink" title="trait"></a>trait</h2><p>很像接口</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pub</span> <span class="class"><span class="keyword">trait</span> <span class="title">Ahh</span></span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">say</span></span>(&amp;<span class="keyword">self</span>) -&gt; <span class="built_in">String</span> &#123;</span><br><span class="line">        <span class="built_in">String</span>::from(<span class="string">"ahhhhh"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">pub</span> <span class="class"><span class="keyword">struct</span> <span class="title">Bhh</span></span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">impl</span> Ahh <span class="keyword">for</span> Bhh &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">say</span></span>(&amp;<span class="keyword">self</span>) -&gt; <span class="built_in">String</span> &#123;</span><br><span class="line">        <span class="built_in">String</span>::from(<span class="string">"ffffff"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-  </section>
-
-  
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
-
-          </div>
-          
-
-        </div>
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">ankikong</p>
-  <div class="site-description motion-element" itemprop="description">ankikong's blog</div>
 </div>
-  <nav class="site-state motion-element">
-      <div class="site-state-item site-state-posts">
-        
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">28</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-    
-      
-      
-      <div class="site-state-item site-state-tags">
-        
-          
-            <a href="/tags/">
-          
-        
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">23</span>
-        <span class="site-state-item-name">标签</span>
-        </a>
-      </div>
-    
-  </nav>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://github.com/ankikong" title="GitHub &rarr; https://github.com/ankikong" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="mailto:ankikong@qq.com" title="E-Mail &rarr; mailto:ankikong@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-    
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ankikong</span>
   </div>
-
-
-
-        </div>
-      </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </footer>
 
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">ankikong</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
-
-        
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-      </div>
-
-    
-
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
   </div>
 
-  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="/lib/reading_progress/reading_progress.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js"></script>
-
-  <script src="/js/utils.js?v=7.3.0"></script>
-  <script src="/js/motion.js?v=7.3.0"></script>
-
-  
-  <script src="/js/affix.js?v=7.3.0"></script>
-  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
-
-
-
-  
-
-  <script src="/js/next-boot.js?v=7.3.0"></script>
-
-  
-
-  
-
-  
-
-
-  
-
-
-
-
-
-  
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-    
-      <script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-    
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 </body>
 </html>

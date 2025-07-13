@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ankikong.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.2","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="配置ipv6进入 network -&gt; interface  wan6 -&gt; edit -&gt; dhcp server general setup： Ignore interface：打勾   ipv6 settings： Designated master：打勾 RA-Service、DHCPv6-Service、NDP-Proxy全部设置为relay mode Learn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Openwrt 开启 ipv6 中继">
+<meta property="og:url" content="https://ankikong.github.io/openwrt-dhcpv6-relay/index.html">
+<meta property="og:site_name" content="ankikong">
+<meta property="og:description" content="配置ipv6进入 network -&gt; interface  wan6 -&gt; edit -&gt; dhcp server general setup： Ignore interface：打勾   ipv6 settings： Designated master：打勾 RA-Service、DHCPv6-Service、NDP-Proxy全部设置为relay mode Learn">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ankikong.github.io/images/2023-02-21-23-20-43.png">
+<meta property="og:image" content="https://ankikong.github.io/images/2023-02-21-23-21-21.png">
+<meta property="og:image" content="https://ankikong.github.io/images/2023-02-21-23-21-36.png">
+<meta property="og:image" content="https://ankikong.github.io/images/2023-02-21-23-30-59.png">
+<meta property="og:image" content="https://ankikong.github.io/images/2023-02-21-23-33-40.png">
+<meta property="article:published_time" content="2023-02-21T14:57:52.000Z">
+<meta property="article:modified_time" content="2023-02-21T15:56:52.600Z">
+<meta property="article:author" content="ankikong">
+<meta property="article:tag" content="openwrt">
+<meta property="article:tag" content="ipv6">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ankikong.github.io/images/2023-02-21-23-20-43.png">
+
+
+<link rel="canonical" href="https://ankikong.github.io/openwrt-dhcpv6-relay/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ankikong.github.io/openwrt-dhcpv6-relay/","path":"openwrt-dhcpv6-relay/","title":"Openwrt 开启 ipv6 中继"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Openwrt 开启 ipv6 中继 | ankikong</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ankikong</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEipv6"><span class="nav-number">1.</span> <span class="nav-text">配置ipv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">2.</span> <span class="nav-text">配置防火墙</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ankikong</p>
+  <div class="site-description" itemprop="description">ankikong's blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/openwrt-dhcpv6-relay/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Openwrt 开启 ipv6 中继 | ankikong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Openwrt 开启 ipv6 中继
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-02-21 22:57:52 / 修改时间：23:56:52" itemprop="dateCreated datePublished" datetime="2023-02-21T22:57:52+08:00">2023-02-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><span id="more"></span>
+
+<h2 id="配置ipv6"><a href="#配置ipv6" class="headerlink" title="配置ipv6"></a>配置ipv6</h2><p>进入 <code>network</code> -&gt; <code>interface</code></p>
+<ol>
+<li><code>wan6</code> -&gt; <code>edit</code> -&gt; <code>dhcp server</code><ul>
+<li><code>general setup</code>：<ul>
+<li><code>Ignore interface</code>：打勾</li>
+</ul>
+</li>
+<li><code>ipv6 settings</code>：<ul>
+<li><code>Designated master</code>：打勾</li>
+<li><code>RA-Service</code>、<code>DHCPv6-Service</code>、<code>NDP-Proxy</code>全部设置为<code>relay mode</code></li>
+<li><code>Learn routes</code>：打勾</li>
+<li>Save 保存</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>lan</code> -&gt; <code>edit</code> -&gt; <code>dhcp server</code> -&gt; <code>ipv6 settings</code><ul>
+<li><code>RA-Service</code>：<code>relay mode</code></li>
+<li><code>DHCPv6-Service</code>：<code>hybrid</code></li>
+<li><code>NDP-Proxy</code>：<code>relay mode</code></li>
+<li><code>Local IPv6 DNS server</code>：打勾</li>
+<li><code>Learn routes</code>：打勾</li>
+</ul>
+</li>
+<li>点击最下面的 <code>Save&amp;Apply</code>，终端重连一下wifi应该就有公网ipv6了</li>
+</ol>
+<p>这是 lan 口配置<br><img src="/../images/2023-02-21-23-20-43.png"><br>这是 wan6 口配置<br><img src="/../images/2023-02-21-23-21-21.png"><br><img src="/../images/2023-02-21-23-21-36.png"></p>
+<h2 id="配置防火墙"><a href="#配置防火墙" class="headerlink" title="配置防火墙"></a>配置防火墙</h2><p>ipv6 一般是运营商会分配&#x2F;48，并且重播后会发生变化，经过路由器dhcp后，终端获取的是 &#x2F;64，剩下的64位，如果是使用 EUI-64 无状态配置的话，那么后面64位是根据mac地址计算出来的。如下图，我的树莓派后面几位都是相同的，并且结尾的4位和mac地址结尾4位一样。<br><img src="/../images/2023-02-21-23-30-59.png"><br>因为前缀会变，所以不能配置固定整个ip，需要用掩码。<br>直接进 network -&gt; firewall -&gt; traffic rules，</p>
+<ol>
+<li>复制ipv6后面4段字符（假设是 <code>1111:2222:3333:4444:aaaa:bbbb:cccc:dddd</code>，则复制<code>aaaa:bbbb:cccc:dddd</code>）</li>
+<li>Name随便填，Protocol按需</li>
+<li>因为是要放行公网请求，Source zone 选 wan6</li>
+<li>source address&amp;port是限制来源ip，可以不管，不填默认全部放行</li>
+<li>destination zone 选 lan</li>
+<li>destination address 填 <code>::&#123;你复制的结尾&#125;/::ffff:ffff:ffff:ffff</code>（按1中假设，结果就是 <code>::aaaa:bbbb:cccc:dddd/::ffff:ffff:ffff:ffff</code>）</li>
+<li>destination port 就是需要放行的端口了，按需填，不填默认全部放行</li>
+<li>action 填 accept，允许请求</li>
+<li>Save 保存就好了</li>
+</ol>
+<p>效果大概这样：<br><img src="/../images/2023-02-21-23-33-40.png"></p>
+<p>整完我的树莓派就能通过ipv6公网，从外网访问了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/openwrt/" rel="tag"># openwrt</a>
+              <a href="/tags/ipv6/" rel="tag"># ipv6</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/rock5b-ax210/" rel="prev" title="rock5b ax210">
+                  <i class="fa fa-angle-left"></i> rock5b ax210
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ankikong</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

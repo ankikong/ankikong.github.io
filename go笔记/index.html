@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ankikong.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.2","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="总结自己遇过的各种问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="golang 笔记">
+<meta property="og:url" content="https://ankikong.github.io/go%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="ankikong">
+<meta property="og:description" content="总结自己遇过的各种问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-24T03:35:42.000Z">
+<meta property="article:modified_time" content="2022-10-15T08:47:32.151Z">
+<meta property="article:author" content="ankikong">
+<meta property="article:tag" content="golang">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://ankikong.github.io/go%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ankikong.github.io/go%E7%AC%94%E8%AE%B0/","path":"go笔记/","title":"golang 笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>golang 笔记 | ankikong</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ankikong</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">一些优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E5%86%85%E6%8D%95%E8%8E%B7%E5%8F%98%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">循环内捕获变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-slice-%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%86%99%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">make slice 的两种写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#time-Since-%E4%BC%98%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">time.Since 优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fmt-%E5%92%8C-strconv"><span class="nav-number">1.4.</span> <span class="nav-text">fmt 和 strconv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5-%E5%92%8C-strings-Builder-%E5%92%8C-%E5%86%85%E5%AD%98%E9%A2%84%E7%94%B3%E8%AF%B7"><span class="nav-number">1.5.</span> <span class="nav-text">字符串拼接 和 strings.Builder 和 内存预申请</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sync-pool"><span class="nav-number">1.6.</span> <span class="nav-text">sync.pool</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E7%9B%B8%E5%85%B3"><span class="nav-number">2.</span> <span class="nav-text">编译相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#race-detector"><span class="nav-number">2.1.</span> <span class="nav-text">race detector</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%90%E4%BA%9B%E6%8A%80%E5%B7%A7"><span class="nav-number">3.</span> <span class="nav-text">某些技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#runtime-LockOSThread"><span class="nav-number">3.1.</span> <span class="nav-text">runtime.LockOSThread</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ankikong</p>
+  <div class="site-description" itemprop="description">ankikong's blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/go%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="golang 笔记 | ankikong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          golang 笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-24 11:35:42" itemprop="dateCreated datePublished" datetime="2022-07-24T11:35:42+08:00">2022-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-10-15 16:47:32" itemprop="dateModified" datetime="2022-10-15T16:47:32+08:00">2022-10-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>总结自己遇过的各种问题</p>
+<span id="more"></span>
+
+<h2 id="一些优化"><a href="#一些优化" class="headerlink" title="一些优化"></a>一些优化</h2><h3 id="循环内捕获变量"><a href="#循环内捕获变量" class="headerlink" title="循环内捕获变量"></a>循环内捕获变量</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;sync&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    wg := &amp;sync.WaitGroup&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        wg.Add(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            fmt.Println(i)</span><br><span class="line">            wg.Done()</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里不是输出0到1，<strong>可能</strong>是10个10，因为捕获的i在后面被修改了，改成加个复制就好了</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;sync&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    wg := &amp;sync.WaitGroup&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        i := i</span><br><span class="line">        wg.Add(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            fmt.Println(i)</span><br><span class="line">            wg.Done()</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="make-slice-的两种写法"><a href="#make-slice-的两种写法" class="headerlink" title="make slice 的两种写法"></a>make slice 的两种写法</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sliceA := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">10</span>)</span><br><span class="line">sliceB := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p>第一种是创建一个slice，容量和长度都是10，可以直接 <code>sliceA[index]</code> 下标访问，初始值是该类型的默认值，比如bool是false，int是0，指针是nil<br>第二种是创建一个slice，容量是10，长度是0，不能直接下标访问，必须要先 <code>sliceB=append(sliceB, 1)</code>后，有数据了才能下标访问<br>slice进行append时不是协程安全的，多协程同时append需要加锁。</p>
+<h3 id="time-Since-优化"><a href="#time-Since-优化" class="headerlink" title="time.Since 优化"></a>time.Since 优化</h3><p>Since在1.16后做了一次优化，使用了runtime的纳秒计数器，少了一次调用 now()，优化了一次syscall。调用的 <code>runtimeNano()</code> 返回的是runtime的毫秒计数器，不需要系统调用。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runtimeNano returns the current value of the runtime clock in nanoseconds.</span></span><br><span class="line"><span class="comment">//go:linkname runtimeNano runtime.nanotime</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">runtimeNano</span><span class="params">()</span></span> <span class="type">int64</span></span><br><span class="line"><span class="comment">// Since returns the time elapsed since t.</span></span><br><span class="line"><span class="comment">// It is shorthand for time.Now().Sub(t).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Since</span><span class="params">(t Time)</span></span> Duration &#123;</span><br><span class="line">    <span class="keyword">var</span> now Time</span><br><span class="line">    <span class="keyword">if</span> t.wall&amp;hasMonotonic != <span class="number">0</span> &#123;</span><br><span class="line">        <span class="comment">// Common case optimization: if t has monotonic time, then Sub will use only it.</span></span><br><span class="line">        now = Time&#123;hasMonotonic, runtimeNano() - startNano, <span class="literal">nil</span>&#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        now = Now()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> now.Sub(t)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以既然有内部计时器，我们可以自己整一个优化的耗时计数。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runtimeNano returns the current value of the runtime clock in nanoseconds.</span></span><br><span class="line"><span class="comment">//go:linkname runtimeNano runtime.nanotime</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">runtimeNano</span><span class="params">()</span></span> <span class="type">int64</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">UseRuntimeNano</span><span class="params">()</span></span> <span class="type">int64</span> &#123;</span><br><span class="line">    nw := runtimeNano()</span><br><span class="line">    <span class="keyword">return</span> runtimeNano() - nw</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面是 benchmark 的代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runtimeNano returns the current value of the runtime clock in nanoseconds.</span></span><br><span class="line"><span class="comment">//go:linkname runtimeNano runtime.nanotime</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">runtimeNano</span><span class="params">()</span></span> <span class="type">int64</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">UseTimeNano</span><span class="params">()</span></span> <span class="type">int64</span> &#123;</span><br><span class="line">    nw := time.Now()</span><br><span class="line">    <span class="keyword">return</span> time.Since(nw).Nanoseconds()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">UseRuntimeNano</span><span class="params">()</span></span> <span class="type">int64</span> &#123;</span><br><span class="line">    nw := runtimeNano()</span><br><span class="line">    <span class="keyword">return</span> runtimeNano() - nw</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkTimeNano</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">        UseTimeNano()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkRuntimeNano</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">        UseRuntimeNano()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>benchmark 结果如下：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cpu: Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz</span><br><span class="line">BenchmarkTimeNano-4             84066586                13.18 ns/op            0 B/op          0 allocs/op</span><br><span class="line">BenchmarkRuntimeNano-4          167052464                7.103 ns/op           0 B/op          0 allocs/op</span><br></pre></td></tr></table></figure>
+
+<p>差不多快了一倍</p>
+<h3 id="fmt-和-strconv"><a href="#fmt-和-strconv" class="headerlink" title="fmt 和 strconv"></a>fmt 和 strconv</h3><p>strconv使用的是查表，甚至还有32位系统的取模优化，性能很不错。<br>fmt使用的是反射，还有各种边界检验，计算量比strconv高很多</p>
+<p>benchmark 代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkUseFmt</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">        _ = fmt.Sprintf(<span class="string">&quot;%d&quot;</span>, i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkUseStrconv</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">        _ = strconv.Itoa(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>benchmark 结果：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cpu: Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz</span><br><span class="line">BenchmarkUseFmt-4               10489794                96.20 ns/op           16 B/op          1 allocs/op</span><br><span class="line">BenchmarkUseStrconv-4           37340638                32.84 ns/op            7 B/op          0 allocs/op</span><br></pre></td></tr></table></figure>
+
+<p>快了差不多3倍</p>
+<h3 id="字符串拼接-和-strings-Builder-和-内存预申请"><a href="#字符串拼接-和-strings-Builder-和-内存预申请" class="headerlink" title="字符串拼接 和 strings.Builder 和 内存预申请"></a>字符串拼接 和 strings.Builder 和 内存预申请</h3><p>很常见的优化了，go的string是不可修改的。append时需要拷贝，少量拼接的话无伤大雅，但是量太大的话，建议使用strings.Builder，如果知道最终字符串会有多大，预先申请会带来更高的性能优化。</p>
+<p>benchmark 代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkSimpleConcat</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">    res := <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">        res += strconv.Itoa(i)</span><br><span class="line">    &#125;</span><br><span class="line">    _ = res</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkUseStringBuilder</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">    sb := &amp;strings.Builder&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">        sb.WriteString(strconv.Itoa(i))</span><br><span class="line">    &#125;</span><br><span class="line">    _ = sb.String()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkUseStringBuilderWithPreAlloc</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">    sb := &amp;strings.Builder&#123;&#125;</span><br><span class="line">    sb.Grow(b.N * <span class="number">8</span>) <span class="comment">// 假设每个数字都是8位的长度</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">        sb.WriteString(strconv.Itoa(i))</span><br><span class="line">    &#125;</span><br><span class="line">    _ = sb.String()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cpu: Intel(R) Core(TM) i5<span class="number">-7300</span>HQ CPU @ <span class="number">2.50</span>GHz</span><br><span class="line">BenchmarkSimpleConcat<span class="number">-4</span>                            <span class="number">92258</span>             <span class="number">23054</span> ns/op          <span class="number">223894</span> B/op          <span class="number">1</span> allocs/op</span><br><span class="line">BenchmarkUseStringBuilder<span class="number">-4</span>                     <span class="number">25517612</span>                <span class="number">45.30</span> ns/op           <span class="number">55</span> B/op          <span class="number">0</span> allocs/op</span><br><span class="line">BenchmarkUseStringBuilderWithPreAlloc<span class="number">-4</span>         <span class="number">34258104</span>                <span class="number">35.47</span> ns/op           <span class="number">15</span> B/op          <span class="number">0</span> allocs/op</span><br></pre></td></tr></table></figure>
+
+<p>明显快了非常多。同样的，还有<code>bytes.Buffer</code>，同样的使用方法，可以优化byte的拼接性能。</p>
+<p>内存预申请从而实现优化的，标准库里还有 <code>url.PathEscape</code> 和 <code>url.QueryEscape</code>，两个都是调用内部方法 <code>escape</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">escape</span><span class="params">(s <span class="type">string</span>, mode encoding)</span></span> <span class="type">string</span> &#123;</span><br><span class="line">    spaceCount, hexCount := <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="comment">// 这里在计算空格数量和需要转码的字符数量</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(s); i++ &#123;</span><br><span class="line">        c := s[i]</span><br><span class="line">        <span class="keyword">if</span> shouldEscape(c, mode) &#123;</span><br><span class="line">            <span class="keyword">if</span> c == <span class="string">&#x27; &#x27;</span> &amp;&amp; mode == encodeQueryComponent &#123;</span><br><span class="line">                spaceCount++</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                hexCount++</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> spaceCount == <span class="number">0</span> &amp;&amp; hexCount == <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> s</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> buf [<span class="number">64</span>]<span class="type">byte</span></span><br><span class="line">    <span class="keyword">var</span> t []<span class="type">byte</span></span><br><span class="line">    <span class="comment">// 一个需要转码的字符会变成 %XX，也就是需要多两倍的空间存放XX</span></span><br><span class="line">    <span class="comment">// 算完直接一次性申请内存，避免重复申请和重复拷贝</span></span><br><span class="line">    required := <span class="built_in">len</span>(s) + <span class="number">2</span>*hexCount</span><br><span class="line">    <span class="keyword">if</span> required &lt;= <span class="built_in">len</span>(buf) &#123;</span><br><span class="line">        t = buf[:required]</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        t = <span class="built_in">make</span>([]<span class="type">byte</span>, required)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="sync-pool"><a href="#sync-pool" class="headerlink" title="sync.pool"></a>sync.pool</h3><ol>
+<li>使用lock-free的双向队列作为缓存</li>
+<li>使用victim作为待gc缓存，每次gc开头，把victim队列的东西清空，然后把local队列转到victim队列</li>
+<li>在获取时，优先在local，然后victim，然后去别的p的pool拿，最后使用New。local中优先使用无锁的private(pin了，不会有竞争)，没有再从shared拿，可以pushHead&#x2F;popHead，别的p只能popTail</li>
+<li>每个P享有一个pool。G操作pool时，需要锁P</li>
+</ol>
+<h2 id="编译相关"><a href="#编译相关" class="headerlink" title="编译相关"></a>编译相关</h2><h3 id="race-detector"><a href="#race-detector" class="headerlink" title="race detector"></a>race detector</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go run -race</span><br><span class="line">go build -race</span><br></pre></td></tr></table></figure>
+
+<p>所有内联tag</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool link --help</span><br></pre></td></tr></table></figure>
+
+<p>所有gc tag</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool compile --help</span><br></pre></td></tr></table></figure>
+
+<p>减小二进制文件大小</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-ldflags=&quot;-s -w&quot;</span><br></pre></td></tr></table></figure>
+
+<p>方便 dlv 调试(关闭优化、关闭内联)</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-gcflags &#x27;-N -l&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="某些技巧"><a href="#某些技巧" class="headerlink" title="某些技巧"></a>某些技巧</h2><h3 id="runtime-LockOSThread"><a href="#runtime-LockOSThread" class="headerlink" title="runtime.LockOSThread"></a>runtime.LockOSThread</h3><p>runtime.LockOSThread()可以把当前goroutine绑定在物理线程上，但是如果在goroutine绑定后没有UnlockOSThread，就会导致goroutine结束时，这条线程被杀掉</p>
+<!-- 锁、并发、pool、值拷贝 -->
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/golang/" rel="tag"># golang</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Github-Action%E5%AD%A6%E4%B9%A0/" rel="prev" title="Github Action学习">
+                  <i class="fa fa-angle-left"></i> Github Action学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/rock5b/" rel="next" title="rock5b">
+                  rock5b <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ankikong</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ankikong.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.2","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="windows安装1pip3 install frida frida-tools  不过frida安装时总会卡住不动,可以到这里 选择和你的python版本一致的,注意指令集也要和python的一样.然后直接easy_install xxx.egg Android安装到这里下载server,主要要和手机的指令集一致的,解压后 12345adb push server 手机路径adb shell c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="frida">
+<meta property="og:url" content="https://ankikong.github.io/frida/index.html">
+<meta property="og:site_name" content="ankikong">
+<meta property="og:description" content="windows安装1pip3 install frida frida-tools  不过frida安装时总会卡住不动,可以到这里 选择和你的python版本一致的,注意指令集也要和python的一样.然后直接easy_install xxx.egg Android安装到这里下载server,主要要和手机的指令集一致的,解压后 12345adb push server 手机路径adb shell c">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ankikong.github.io/images/native1.png">
+<meta property="article:published_time" content="2020-09-20T05:20:19.000Z">
+<meta property="article:modified_time" content="2020-09-20T08:56:48.288Z">
+<meta property="article:author" content="ankikong">
+<meta property="article:tag" content="technology">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ankikong.github.io/images/native1.png">
+
+
+<link rel="canonical" href="https://ankikong.github.io/frida/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ankikong.github.io/frida/","path":"frida/","title":"frida"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>frida | ankikong</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ankikong</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">windows安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">Android安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">4.</span> <span class="nav-text">其他注意事项</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ankikong</p>
+  <div class="site-description" itemprop="description">ankikong's blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ankikong.github.io/frida/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ankikong">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ankikong">
+      <meta itemprop="description" content="ankikong's blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="frida | ankikong">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          frida
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-20 13:20:19 / 修改时间：16:56:48" itemprop="dateCreated datePublished" datetime="2020-09-20T13:20:19+08:00">2020-09-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="windows安装"><a href="#windows安装" class="headerlink" title="windows安装"></a>windows安装</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install frida frida-tools</span><br></pre></td></tr></table></figure>
+
+<p>不过<code>frida</code>安装时总会卡住不动,可以到<a href="https://pypi.org/project/frida/#files">这里</a> 选择和你的python版本一致的,注意指令集也要和python的一样.然后直接<code>easy_install xxx.egg</code></p>
+<h2 id="Android安装"><a href="#Android安装" class="headerlink" title="Android安装"></a>Android安装</h2><p>到<a href="https://github.com/frida/frida/releases">这里</a>下载server,主要要和手机的指令集一致的,解压后</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb push server 手机路径</span><br><span class="line">adb shell chmod +x server</span><br><span class="line">forward tcp:27042 tcp:27042</span><br><span class="line">forward tcp:27043 tcp:27043</span><br><span class="line">adb shell ./server</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>python脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">js = <span class="built_in">open</span>(<span class="string">&quot;code/frida/a.js&quot;</span>, encoding=<span class="string">&quot;utf8&quot;</span>).read()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_message</span>(<span class="params">message, data</span>):</span><br><span class="line">    <span class="built_in">print</span>(data)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> [<span class="string">&quot;stack&quot;</span>, <span class="string">&quot;description&quot;</span>]:</span><br><span class="line">        msg = message.get(k)</span><br><span class="line">        <span class="keyword">if</span> msg <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="built_in">print</span>(msg)</span><br><span class="line"></span><br><span class="line">session = frida.get_remote_device().attach(<span class="string">&#x27;com.picacomic.fregata&#x27;</span>)</span><br><span class="line">script = session.create_script(js)</span><br><span class="line">script.on(<span class="string">&#x27;message&#x27;</span>, on_message)</span><br><span class="line">script.load()</span><br><span class="line"></span><br><span class="line">sys.stdin.read()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>获取非native方法的输入值和返回值,这里的方法为 <code>String c([]String)</code></p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="title class_">Java</span>.<span class="property">available</span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="title class_">MyApplication</span> = <span class="title class_">Java</span>.<span class="title function_">use</span>(<span class="string">&#x27;com.picacomic.fregata.MyApplication&#x27;</span>);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">MyApplication</span>);</span><br><span class="line">        <span class="title class_">MyApplication</span>.<span class="property">c</span>.<span class="property">implementation</span> = <span class="keyword">function</span> (<span class="params">v</span>) &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;param:&quot;</span>);</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(v);</span><br><span class="line">            <span class="keyword">var</span> ret = <span class="variable language_">this</span>.<span class="title function_">c</span>(v);</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;return value:&quot;</span>);</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(ret);</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;load java failed&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取native方法的输入值和返回值,这里的方法是 <code>String getStringSigFromNative();</code></p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="title class_">Java</span>.<span class="property">available</span>) &#123;</span><br><span class="line">    <span class="title class_">Java</span>.<span class="title function_">perform</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="title class_">Interceptor</span>.<span class="title function_">attach</span>(<span class="title class_">Module</span>.<span class="title function_">findExportByName</span>(<span class="string">&quot;libJniTest.so&quot;</span>, <span class="string">&quot;Java_com_picacomic_fregata_MyApplication_getStringSigFromNative&quot;</span>), &#123;</span><br><span class="line">            <span class="comment">// onEnter 是方法开始前调用的,args[0]是env,args[1]是jclass,args[2...]就是方法的输入值了</span></span><br><span class="line">            <span class="attr">onEnter</span>: <span class="keyword">function</span>(<span class="params">args</span>) &#123;</span><br><span class="line">                <span class="title function_">send</span>(args[<span class="number">0</span>]);</span><br><span class="line">                <span class="title function_">send</span>(args[<span class="number">1</span>]);</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">onLeave</span>: <span class="keyword">function</span>(<span class="params">ret</span>) &#123;</span><br><span class="line">                <span class="title function_">send</span>(<span class="string">&quot;ret:&quot;</span> + <span class="title class_">Java</span>.<span class="property">vm</span>.<span class="title function_">getEnv</span>().<span class="title function_">getStringUtfChars</span>(ret, <span class="literal">null</span>).<span class="title function_">readCString</span>());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;load java failed&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>Java_com_picacomic_fregata_MyApplication_getStringSigFromNative</code>是查so文件得到的方法名,非java源码里面的名称.可以把 .so抠出来,丢到linux里面,然后 <code>nm -D libJniTest.so</code>,输出大概长这样<br><img src="/../images/native1.png" alt="native1"></p>
+<h2 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h2><p>打印String VAL 需要用 <code>Java.vm.getEnv().getStringUtfChars(VAL, null).readCString()</code>,不然打出来是个地址</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/technology/" rel="tag"># technology</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/mysql/" rel="prev" title="mysql">
+                  <i class="fa fa-angle-left"></i> mysql
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/at-t/" rel="next" title="at&amp;t">
+                  at&t <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">ankikong</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
